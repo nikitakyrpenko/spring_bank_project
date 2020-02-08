@@ -19,10 +19,8 @@ public class AccountEntity {
     @Column(name = "account_id",nullable = false)
     private Integer id;
 
-
     @Column(name = "expiration_date",nullable = false)
     private Date expirationDate;
-
 
     @Column(name = "balance",nullable = false)
     private Double balance;

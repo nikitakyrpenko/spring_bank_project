@@ -4,12 +4,12 @@ import com.epam.bankproject.bankproject.enums.ChargeType;
 import com.epam.bankproject.bankproject.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
