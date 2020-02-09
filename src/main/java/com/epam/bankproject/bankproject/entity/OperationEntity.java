@@ -16,6 +16,7 @@ import java.sql.Date;
 public class OperationEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "operation_id")
     private Integer id;
 

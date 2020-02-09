@@ -4,10 +4,12 @@ import com.epam.bankproject.bankproject.enums.ChargeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
+@ToString(exclude="account")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -15,6 +17,7 @@ import javax.persistence.*;
 public class ChargeEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "charge_id")
     private Integer id;
 
@@ -26,6 +29,7 @@ public class ChargeEntity {
     private ChargeType chargeType;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_account_charge")
     private AccountEntity account;
 
 

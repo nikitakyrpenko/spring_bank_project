@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 import java.sql.Date;
 
 @ToString(callSuper = true)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public class CreditAccount extends Account implements InterestChargeable {
 
     private static final int CREDIT_PERIOD                = 12;

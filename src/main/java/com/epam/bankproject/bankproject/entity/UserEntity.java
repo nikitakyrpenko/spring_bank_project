@@ -1,10 +1,9 @@
 package com.epam.bankproject.bankproject.entity;
 
-import com.epam.bankproject.bankproject.enums.ChargeType;
+
 import com.epam.bankproject.bankproject.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -20,7 +19,8 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @Column(name = "users_id",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id",nullable = false)
     private Integer id;
 
     @Column(name = "firstname",nullable = false)
@@ -36,7 +36,7 @@ public class UserEntity {
     @Email
     private String email;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "passwords",nullable = false)
     @NotEmpty(message = "Users password should not be empty")
     private String password;
 
