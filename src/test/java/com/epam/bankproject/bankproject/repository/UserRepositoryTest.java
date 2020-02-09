@@ -69,7 +69,8 @@ public class UserRepositoryTest {
 
     @Test
     public void whenFindByEmailParameterIsNull_thenThrowException(){
-        //TODO
+        /*expectedException.expect(NullPointerException.class);
+        expectedException.expectMessage("email is marked non-null but is null");*/
         userRepository.findByEmail(null);
     }
 }

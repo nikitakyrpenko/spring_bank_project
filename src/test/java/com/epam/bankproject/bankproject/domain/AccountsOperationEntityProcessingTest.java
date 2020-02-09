@@ -10,6 +10,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -55,20 +56,22 @@ public class AccountsOperationEntityProcessingTest {
     public void init(){
         sender = DepositAccount.builder()
                 .depositAmount(senderAccountBalance)
-                .rate(0.1)
+                .depositRate(0.1)
                 .build();
 
 
         receiver = CreditAccount.builder()
                 .balance(receiverAccountBalance)
                 .limit(0.1)
-                .rate(0.1)
+                .creditRate(0.1)
                 .build();
 
         operationEntity = Operation.builder()
                 .transfer(transfer)
+                .purpose("test")
                 .sender(sender)
                 .receiver(receiver)
+                .dateOfOperation(Date.valueOf("2020-01-01"))
                 .build();
 
         sender.processTransfer(operationEntity);

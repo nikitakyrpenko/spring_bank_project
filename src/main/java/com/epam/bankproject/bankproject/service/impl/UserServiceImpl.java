@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
     private Mapper<User, UserEntity> userMapper;
 
 
@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService {
         userRepository.findById(user.getId())
                 .ifPresent(userEntity -> {throw new DuplicateEntityException("User already exist");});
 
-        User userWithHashedPassword = user.toBuilder()
+        /*User userWithHashedPassword = user.toBuilder()
                 .password(bCryptPasswordEncoder.encode(user.getPassword()))
                 .build();
-        userRepository.save(userMapper.mapDomainToEntity(userWithHashedPassword));
+        userRepository.save(userMapper.mapDomainToEntity(userWithHashedPassword));*/
     }
 }

@@ -1,6 +1,7 @@
 package com.epam.bankproject.bankproject.domain;
 
 import com.epam.bankproject.bankproject.domain.impl.Operation;
+import com.epam.bankproject.bankproject.domain.impl.User;
 import com.epam.bankproject.bankproject.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.sql.Date;
 
 @ToString
 @AllArgsConstructor
-public abstract class  Account implements OperationProcessable{
+public abstract class Account implements OperationProcessable{
 
     @Getter
     private final Integer id;
@@ -22,6 +23,9 @@ public abstract class  Account implements OperationProcessable{
     @Getter
     @Setter
     private Double balance;
+
+    @Getter
+    private User owner;
 
 
     @Override

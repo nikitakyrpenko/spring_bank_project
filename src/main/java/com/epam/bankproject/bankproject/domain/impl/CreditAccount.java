@@ -25,7 +25,7 @@ public class CreditAccount extends Account implements InterestChargeable {
 
     @Getter
     @DecimalMin("0.001")
-    private final Double rate;
+    private final Double creditRate;
 
     @Getter
     private final AccountType accountType;
@@ -41,19 +41,20 @@ public class CreditAccount extends Account implements InterestChargeable {
                          Date expirationDate,
                          Double balance,
                          Double limit,
-                         Double rate,
+                         Double creditRate,
                          Double liability,
+                         User owner,
                          AccountType accountType){
-        super(id,expirationDate,balance);
+        super(id,expirationDate,balance,owner);
         this.limit       = limit;
-        this.rate        = rate;
+        this.creditRate  = creditRate;
         this.accountType = accountType;
         this.liability   = liability;
         this.charge      = calculateCreditLiabilityPerMonth();
     }
 
     private Double percents() {
-        return rate / CREDIT_PERIOD;
+        return creditRate / CREDIT_PERIOD;
     }
 
     private Double calculateCreditLiabilityPerMonth() {

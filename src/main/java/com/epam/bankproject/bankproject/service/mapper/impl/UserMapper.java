@@ -3,12 +3,14 @@ package com.epam.bankproject.bankproject.service.mapper.impl;
 import com.epam.bankproject.bankproject.domain.impl.User;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;
+import lombok.NonNull;
+import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 
+@Component
 public class UserMapper implements Mapper<User, UserEntity> {
     @Override
-    public UserEntity mapDomainToEntity(User domain) {
+    public UserEntity mapDomainToEntity(@NonNull User domain) {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(domain.getId());
         userEntity.setName(domain.getName());
@@ -21,7 +23,7 @@ public class UserMapper implements Mapper<User, UserEntity> {
     }
 
     @Override
-    public User mapEntityToDomain(UserEntity entity) {
+    public User mapEntityToDomain(@NonNull UserEntity entity) {
         return User.builder()
                 .id(entity.getId())
                 .name(entity.getName())

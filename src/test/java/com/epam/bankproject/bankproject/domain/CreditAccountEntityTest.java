@@ -41,7 +41,7 @@ public class CreditAccountEntityTest {
          creditAccount = CreditAccount
                  .builder()
                  .limit(creditLimit)
-                 .rate(creditRate)
+                 .creditRate(creditRate)
                  .build();
     }
 

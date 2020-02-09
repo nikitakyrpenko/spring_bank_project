@@ -1,7 +1,9 @@
 package com.epam.bankproject.bankproject.domain.impl;
 
 import com.epam.bankproject.bankproject.domain.Account;
+import com.epam.bankproject.bankproject.domain.InterestChargeable;
 import com.epam.bankproject.bankproject.enums.AccountType;
+import com.epam.bankproject.bankproject.enums.ChargeType;
 import lombok.*;
 
 import javax.validation.constraints.DecimalMin;
@@ -9,7 +11,7 @@ import java.sql.Date;
 
 @ToString(callSuper = true)
 @EqualsAndHashCode
-public class DepositAccount extends Account {
+public class DepositAccount extends Account implements InterestChargeable {
 
     @Getter
     public final Double depositAmount;
@@ -26,17 +28,28 @@ public class DepositAccount extends Account {
                          Date expirationDate,
                          Double balance,
                          Double depositAmount,
-                         Double rate,
+                         Double depositRate,
+                         User owner,
                          AccountType accountType) {
-        super(id, expirationDate, balance);
+        super(id, expirationDate, balance, owner);
         super.setBalance(depositAmount);
         this.depositAmount = depositAmount;
-        this.rate          = rate;
+        this.rate          = depositRate;
         this.accountType   = accountType;
     }
 
     @Override
     public Double getCharge() {
         return this.getBalance() * rate;
+    }
+
+    @Override
+    public Charge processCharge() {
+        setBalance(getBalance() + getCharge());
+        return Charge.builder()
+                .chargeAmount(getCharge())
+                .chargeType(ChargeType.DEPOSIT_ARRIVAL)
+                .account(this)
+                .build();
     }
 }

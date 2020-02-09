@@ -41,7 +41,7 @@ public class DepositAccountEntityTest {
         depositAccount = DepositAccount.builder()
                 .balance(deposit)
                 .depositAmount(deposit)
-                .rate(depositRate)
+                .depositRate(depositRate)
                 .build();
     }
 
