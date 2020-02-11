@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface OperationRepository extends PagingAndSortingRepository<OperationEntity, Integer> {
 
     @Query(value = "SELECT o FROM OperationEntity o WHERE o.receiverAccount.id = :id or o.senderAccount.id = :id")

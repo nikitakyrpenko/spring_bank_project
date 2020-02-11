@@ -48,9 +48,7 @@ public class UserEntity {
     @Column(columnDefinition = "smallint", name = "fk_roles_users",nullable = false)
     private Role role;
 
-    @OneToMany( mappedBy = "owner",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany( mappedBy = "owner")
     private List<AccountEntity> accounts;
 
 

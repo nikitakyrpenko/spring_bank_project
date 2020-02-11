@@ -24,17 +24,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(@NotNull String email, @NotNull String password) {
         return userRepository.findByEmail(email)
-                .map(userEntity -> userMapper.mapEntityToDomain(userEntity))
+                .map(userMapper::mapEntityToDomain)
+                .filter(user -> passwordEncoder.matches(password, user.getPassword()))
                 .orElseThrow();
     }
 
     @Override
     public void register(@NotNull User user) {
-        userRepository.findById(user.getId())
+        userRepository.findByEmail(user.getEmail())
                 .ifPresent(userEntity -> {throw new DuplicateEntityException("User already exist");});
+
         User userWithHashedPassword = user.toBuilder()
                 .password(passwordEncoder.encode(user.getPassword()))
                 .build();
-        userRepository.save(userMapper.mapDomainToEntity(userWithHashedPassword));
+
+        UserEntity userEntity = userMapper.mapDomainToEntity(userWithHashedPassword);
+        userRepository.save(userEntity);
     }
 }

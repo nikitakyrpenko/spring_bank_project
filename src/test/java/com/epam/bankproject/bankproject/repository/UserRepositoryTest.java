@@ -1,6 +1,8 @@
 package com.epam.bankproject.bankproject.repository;
 
+import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.UserEntity;
+import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.Role;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -13,13 +15,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.sql.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -34,11 +36,11 @@ public class UserRepositoryTest {
 
 
     @Test
-    public void whenFindAll_thenReturn10(){
+    public void whenFindAll_thenReturnTrue(){
         List<UserEntity> actual = StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        assertEquals(actual.size(),10);
+        assertFalse(actual.isEmpty());
     }
 
     @Test
@@ -65,6 +67,30 @@ public class UserRepositoryTest {
 
         UserEntity userEntity = userRepository.findByEmail(me.getEmail()).get();
 
+    }
+
+    @Test
+    public void whenSaveUserEntity_thenReturnUserEntity(){
+
+        AccountEntity accountEntity = new AccountEntity();
+        accountEntity.setId(1);
+        accountEntity.setExpirationDate(Date.valueOf("2021-03-12"));
+        accountEntity.setBalance(1000.0);
+        accountEntity.setDepositRate(0.2);
+        accountEntity.setAccountType(AccountType.DEPOSIT);
+
+        UserEntity meEntity = new UserEntity();
+        meEntity.setName("Jon");
+        meEntity.setSurname("Doe");
+        meEntity.setEmail("jondoe@gmail.com");
+        meEntity.setPassword("P@ssword97");
+        meEntity.setTelephone("380508321899");
+        meEntity.setRole(Role.CLIENT);
+        meEntity.setAccounts(Arrays.asList(accountEntity));
+
+        UserEntity save = userRepository.save(meEntity);
+        assertEquals(meEntity, save);
+        assertEquals(meEntity.getAccounts(), save.getAccounts());
     }
 
     @Test
