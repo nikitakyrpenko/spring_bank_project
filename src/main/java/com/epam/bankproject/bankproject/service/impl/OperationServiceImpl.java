@@ -12,7 +12,6 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +23,7 @@ public class OperationServiceImpl implements OperationService {
     private OperationRepository operationRepository;
     private Mapper<Operation, OperationEntity> operationMapper;
 
+    //TODO TRANSACTION HERE
     @Override
     public Operation save(@NonNull Operation operation){
         if (operation.getSender().getBalance() < operation.getTransfer()){
@@ -48,6 +48,7 @@ public class OperationServiceImpl implements OperationService {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    //TODO CHECK FOR PAGEABLE
     @Override
     public List<Operation> findAllByReceiverAccountId(@NonNull Integer id, @NonNull Pageable pageable) {
         return operationRepository.findAllByReceiverAccountId(id, pageable)
@@ -55,6 +56,7 @@ public class OperationServiceImpl implements OperationService {
                 .map(operationMapper::mapEntityToDomain)
                 .collect(Collectors.toUnmodifiableList());
     }
+
 
     @Override
     public List<Operation> findAllBySenderAccountId(@NonNull Integer id, @NonNull Pageable pageable) {

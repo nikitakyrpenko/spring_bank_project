@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -21,18 +20,9 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
     private Mapper<Account, AccountEntity> accountMapper;
 
-
     @Override
     public List<Account> findAllByOwnerId(@NonNull Integer id, @NonNull Pageable pageable) {
         return accountRepository.findAllByOwnerId(id, pageable)
-                .stream()
-                .map(accountMapper::mapEntityToDomain)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Account> findAllByOwnerId(@NonNull Integer id) {
-        return accountRepository.findAllByOwnerId(id)
                 .stream()
                 .map(accountMapper::mapEntityToDomain)
                 .collect(Collectors.toList());

@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public interface ChargeService {
 
-    List<Charge> findAllByAccountId(@NonNull Integer id);
+    List<Charge> findAllByAccountId(Integer id);
 
-    List<Charge> findAllByAccountId(@NonNull Integer id, @NonNull Pageable pageable);
+    List<Charge> findAllByAccountId(Integer id,Pageable pageable);
 
-    void save(@NonNull Charge charge);
+    void save(Charge charge);
 }

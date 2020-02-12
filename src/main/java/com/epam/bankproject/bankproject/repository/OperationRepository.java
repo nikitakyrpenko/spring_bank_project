@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface OperationRepository extends PagingAndSortingRepository<OperationEntity, Integer> {
 
     @Query(value = "SELECT o FROM OperationEntity o WHERE o.receiverAccount.id = :id or o.senderAccount.id = :id")

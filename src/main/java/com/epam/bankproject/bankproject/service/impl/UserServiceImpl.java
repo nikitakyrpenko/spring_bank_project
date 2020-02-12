@@ -2,6 +2,7 @@ package com.epam.bankproject.bankproject.service.impl;
 
 import com.epam.bankproject.bankproject.domain.impl.User;
 import com.epam.bankproject.bankproject.entity.UserEntity;
+import com.epam.bankproject.bankproject.enums.Role;
 import com.epam.bankproject.bankproject.repository.UserRepository;
 import com.epam.bankproject.bankproject.service.UserService;
 import com.epam.bankproject.bankproject.service.exception.DuplicateEntityException;
@@ -20,7 +21,9 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
     private Mapper<User, UserEntity> userMapper;
 
+    //CONTROLLER ADVICE
 
+    //TODO CUSTOM EXCEPTIONS
     @Override
     public User login(@NotNull String email, @NotNull String password) {
         return userRepository.findByEmail(email)
@@ -31,8 +34,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(@NotNull User user) {
+        user = user.toBuilder().role(Role.CLIENT).build();
         userRepository.findByEmail(user.getEmail())
-                .ifPresent(userEntity -> {throw new DuplicateEntityException("User already exist");});
+                .ifPresent(userEntity -> {
+                    throw new DuplicateEntityException("User already exist");
+                });
 
         User userWithHashedPassword = user.toBuilder()
                 .password(passwordEncoder.encode(user.getPassword()))

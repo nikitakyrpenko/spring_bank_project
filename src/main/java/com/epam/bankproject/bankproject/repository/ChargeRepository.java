@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface ChargeRepository extends PagingAndSortingRepository<ChargeEntity, Integer> {
 
     List<ChargeEntity> findAllByAccountId(Integer id);
