@@ -1,0 +1,99 @@
+html, body, .container-fluid, .container{
+    height:100%;
+}
+
+select#lang option[value="UA"] {
+    background-image:url(../images/Ukr.png);
+}
+select#lang option[value="ENG"] {
+    background-image:url(../images/USA.png);
+}
+
+.back{
+    background-image: url('../images/Business.png');
+    height: 110%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 70%;
+}
+.form-cust{
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    padding: 15px;
+    box-shadow: 10px 5px 5px #000;
+    border-radius: 5px;
+}
+.card-cust{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    /*    padding-left: 10px;*/
+}
+
+.list-group-item{
+    font-size: 13px;
+    line-height: 13px;
+
+}
+hr{
+    margin: 8px;
+}
+.hr-gray{
+    color:dimgray;
+}
+
+.row-cust{
+    padding-left: 24px;
+}
+.btn-cust{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.a-cust{
+    margin-left: 10px;
+}
+
+.cont{
+    width: 200px;
+}
+
+.marg{
+    margin-top:30px;
+    margin-bottom: 10px;
+}
+.cl{
+    padding-left:0;
+}
+.header-cust{
+    height: 30px;
+}
+.row-mr-top{
+    margin-top:12px;
+}
+#cardNumber{
+    height: 44px;
+    padding-top: 14px;
+}
+.round{
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+    border-radius: 30px;
+}
+.row-bott{
+    /*
+        margin-top: 30px;
+        position:absolute;
+    */
+    bottom:0;
+    margin: 20px;
+}
+
+.error-container {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg==);}
+
+
+.error-temp {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }

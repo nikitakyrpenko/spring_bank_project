@@ -1,9 +1,9 @@
 package com.epam.bankproject.bankproject.service.mapper.impl;
 
 import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.impl.CreditAccount;
-import com.epam.bankproject.bankproject.domain.impl.DepositAccount;
-import com.epam.bankproject.bankproject.domain.impl.User;
+import com.epam.bankproject.bankproject.domain.CreditAccount;
+import com.epam.bankproject.bankproject.domain.DepositAccount;
+import com.epam.bankproject.bankproject.domain.User;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.enums.AccountType;

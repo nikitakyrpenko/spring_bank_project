@@ -8,6 +8,9 @@ import com.epam.bankproject.bankproject.service.mapper.Mapper;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -21,11 +24,19 @@ public class AccountServiceImpl implements AccountService {
     private Mapper<Account, AccountEntity> accountMapper;
 
     @Override
-    public List<Account> findAllByOwnerId(@NonNull Integer id, @NonNull Pageable pageable) {
-        return accountRepository.findAllByOwnerId(id, pageable)
+    public Page<Account> findAllByOwnerId(@NonNull Integer id, @NonNull Pageable pageable) {
+        List<Account> accounts;
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        long totalRecords = accountRepository.countAllByOwnerId(id);
+
+        accounts = accountRepository.findAllByOwnerId(id, pageable)
                 .stream()
                 .map(accountMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+
+        return new PageImpl<Account>(accounts,PageRequest.of(currentPage,pageSize),totalRecords);
     }
 
     @Override
@@ -49,6 +60,11 @@ public class AccountServiceImpl implements AccountService {
                 .stream()
                 .map(accountMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long countAllByOwnerId(Integer id) {
+        return accountRepository.countAllByOwnerId(id);
     }
 
     @Override

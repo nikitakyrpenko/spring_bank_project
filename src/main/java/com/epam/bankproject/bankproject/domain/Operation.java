@@ -1,4 +1,4 @@
-package com.epam.bankproject.bankproject.domain.impl;
+package com.epam.bankproject.bankproject.domain;
 
 import com.epam.bankproject.bankproject.domain.Account;
 import lombok.Builder;

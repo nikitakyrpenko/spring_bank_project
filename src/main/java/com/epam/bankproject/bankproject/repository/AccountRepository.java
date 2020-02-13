@@ -2,6 +2,7 @@ package com.epam.bankproject.bankproject.repository;
 
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import lombok.NonNull;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -15,10 +16,12 @@ import java.util.Optional;
 public interface AccountRepository extends PagingAndSortingRepository<AccountEntity, Integer> {
 
 
-    List<AccountEntity> findAllByOwnerId(@NonNull Integer id, Pageable pageable);
+    Page<AccountEntity> findAllByOwnerId(@NonNull Integer id, Pageable pageable);
 
     List<AccountEntity> findAllByOwnerId(@NonNull Integer id);
 
     List<AccountEntity> findAll();
+
+    long countAllByOwnerId(Integer id);
 
 }

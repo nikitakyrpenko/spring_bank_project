@@ -1,8 +1,5 @@
 package com.epam.bankproject.bankproject.domain;
 
-import com.epam.bankproject.bankproject.domain.impl.CreditAccount;
-import com.epam.bankproject.bankproject.domain.impl.DepositAccount;
-import com.epam.bankproject.bankproject.domain.impl.Operation;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

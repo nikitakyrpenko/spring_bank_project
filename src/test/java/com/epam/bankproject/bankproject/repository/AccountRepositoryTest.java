@@ -75,7 +75,7 @@ public class AccountRepositoryTest {
         me.setName("Freya");
         me.setEmail("dolor.Donec@etmagnaPraesent.net");
 
-        List<AccountEntity> allByOwnerId = accountRepository.findAllByOwnerId(me.getId(), PageRequest.of(0,2));
+        List<AccountEntity> allByOwnerId = accountRepository.findAllByOwnerId(me.getId(), PageRequest.of(0,2)).getContent();
         System.out.println(allByOwnerId);
         assertTrue(allByOwnerId.size() <= 2);
 

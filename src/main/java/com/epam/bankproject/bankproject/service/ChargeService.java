@@ -1,8 +1,7 @@
 package com.epam.bankproject.bankproject.service;
 
-import com.epam.bankproject.bankproject.domain.impl.Charge;
+import com.epam.bankproject.bankproject.domain.Charge;
 
-import lombok.NonNull;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

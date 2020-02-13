@@ -1,7 +1,7 @@
 package com.epam.bankproject.bankproject.service.mapper.impl;
 
 import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.impl.Charge;
+import com.epam.bankproject.bankproject.domain.Charge;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.ChargeEntity;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;

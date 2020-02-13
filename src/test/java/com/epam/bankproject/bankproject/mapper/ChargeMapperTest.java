@@ -1,9 +1,9 @@
 package com.epam.bankproject.bankproject.mapper;
 
 import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.impl.Charge;
-import com.epam.bankproject.bankproject.domain.impl.CreditAccount;
-import com.epam.bankproject.bankproject.domain.impl.User;
+import com.epam.bankproject.bankproject.domain.Charge;
+import com.epam.bankproject.bankproject.domain.CreditAccount;
+import com.epam.bankproject.bankproject.domain.User;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.ChargeEntity;
 import com.epam.bankproject.bankproject.entity.UserEntity;
@@ -40,7 +40,7 @@ public class ChargeMapperTest {
                 .email("jondoe@gmail.com")
                 .password("P@ssword97")
                 .telephone("380508321899")
-                .role(Role.CLIENT)
+                .role(Role.ROLE_USER)
                 .build();
 
         Account account = CreditAccount.builder()
@@ -80,7 +80,7 @@ public class ChargeMapperTest {
         userEntity.setEmail("jondoe@gmail.com");
         userEntity.setPassword("P@ssword97");
         userEntity.setTelephone("380508321899");
-        userEntity.setRole(Role.CLIENT);
+        userEntity.setRole(Role.ROLE_USER);
 
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(1);

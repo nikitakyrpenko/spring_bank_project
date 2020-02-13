@@ -1,7 +1,5 @@
-package com.epam.bankproject.bankproject.domain.impl;
+package com.epam.bankproject.bankproject.domain;
 
-import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.InterestChargeable;
 import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.ChargeType;
 import lombok.*;

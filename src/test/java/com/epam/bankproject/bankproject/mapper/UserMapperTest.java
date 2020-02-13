@@ -1,6 +1,6 @@
 package com.epam.bankproject.bankproject.mapper;
 
-import com.epam.bankproject.bankproject.domain.impl.User;
+import com.epam.bankproject.bankproject.domain.User;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.enums.Role;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;
@@ -34,7 +34,7 @@ public class UserMapperTest {
                 .email("jondoe@gmail.com")
                 .password("P@ssword97")
                 .telephone("380508321899")
-                .role(Role.CLIENT)
+                .role(Role.ROLE_USER)
                 .build();
 
         UserEntity meEntity = new UserEntity();
@@ -44,7 +44,7 @@ public class UserMapperTest {
         meEntity.setEmail("jondoe@gmail.com");
         meEntity.setPassword("P@ssword97");
         meEntity.setTelephone("380508321899");
-        meEntity.setRole(Role.CLIENT);
+        meEntity.setRole(Role.ROLE_USER);
 
         User actualDomain = userMapper.mapEntityToDomain(meEntity);
 
@@ -62,7 +62,7 @@ public class UserMapperTest {
                 .email("jondoe@gmail.com")
                 .password("P@ssword97")
                 .telephone("380508321899")
-                .role(Role.CLIENT)
+                .role(Role.ROLE_USER)
                 .build();
 
         UserEntity meEntity = new UserEntity();
@@ -72,7 +72,7 @@ public class UserMapperTest {
         meEntity.setEmail("jondoe@gmail.com");
         meEntity.setPassword("P@ssword97");
         meEntity.setTelephone("380508321899");
-        meEntity.setRole(Role.CLIENT);
+        meEntity.setRole(Role.ROLE_USER);
 
         UserEntity actualEntity = userMapper.mapDomainToEntity(me);
 

@@ -1,9 +1,9 @@
 package com.epam.bankproject.bankproject.mapper;
 
 import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.impl.CreditAccount;
-import com.epam.bankproject.bankproject.domain.impl.DepositAccount;
-import com.epam.bankproject.bankproject.domain.impl.User;
+import com.epam.bankproject.bankproject.domain.CreditAccount;
+import com.epam.bankproject.bankproject.domain.DepositAccount;
+import com.epam.bankproject.bankproject.domain.User;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.enums.AccountType;
@@ -38,7 +38,7 @@ public class AccountMapperTest {
                 .email("jondoe@gmail.com")
                 .password("P@ssword97")
                 .telephone("380508321899")
-                .role(Role.CLIENT)
+                .role(Role.ROLE_USER)
                 .build();
 
         Account account = DepositAccount.builder()
@@ -72,7 +72,7 @@ public class AccountMapperTest {
                 .email("jondoe@gmail.com")
                 .password("P@ssword97")
                 .telephone("380508321899")
-                .role(Role.CLIENT)
+                .role(Role.ROLE_USER)
                 .build();
 
         Account account = CreditAccount.builder()
@@ -109,7 +109,7 @@ public class AccountMapperTest {
         userEntity.setEmail("dolor.Donec@etmagnaPraesent.net");
         userEntity.setTelephone("380984895779");
         userEntity.setPassword("P@ssword97");
-        userEntity.setRole(Role.CLIENT);
+        userEntity.setRole(Role.ROLE_USER);
 
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(1);
@@ -145,7 +145,7 @@ public class AccountMapperTest {
         userEntity.setEmail("dolor.Donec@etmagnaPraesent.net");
         userEntity.setTelephone("380984895779");
         userEntity.setPassword("P@ssword97");
-        userEntity.setRole(Role.CLIENT);
+        userEntity.setRole(Role.ROLE_USER);
 
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(1);

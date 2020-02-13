@@ -1,7 +1,7 @@
 package com.epam.bankproject.bankproject.service.impl;
 
 import com.epam.bankproject.bankproject.domain.InterestChargeable;
-import com.epam.bankproject.bankproject.domain.impl.Charge;
+import com.epam.bankproject.bankproject.domain.Charge;
 import com.epam.bankproject.bankproject.entity.ChargeEntity;
 import com.epam.bankproject.bankproject.repository.ChargeRepository;
 import com.epam.bankproject.bankproject.service.AccountService;

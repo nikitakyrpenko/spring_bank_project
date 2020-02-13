@@ -1,7 +1,6 @@
 package com.epam.bankproject.bankproject.domain;
 
 
-import com.epam.bankproject.bankproject.domain.impl.CreditAccount;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

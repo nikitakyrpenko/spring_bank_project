@@ -4,7 +4,6 @@ import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.Role;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
@@ -85,7 +83,7 @@ public class UserRepositoryTest {
         meEntity.setEmail("jondoe@gmail.com");
         meEntity.setPassword("P@ssword97");
         meEntity.setTelephone("380508321899");
-        meEntity.setRole(Role.CLIENT);
+        meEntity.setRole(Role.ROLE_USER);
         meEntity.setAccounts(Arrays.asList(accountEntity));
 
         UserEntity save = userRepository.save(meEntity);

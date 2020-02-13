@@ -1,6 +1,6 @@
 package com.epam.bankproject.bankproject.service.mapper.impl;
 
-import com.epam.bankproject.bankproject.domain.impl.User;
+import com.epam.bankproject.bankproject.domain.User;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;
 import lombok.NonNull;

@@ -1,19 +1,16 @@
 package com.epam.bankproject.bankproject.repository;
 
-import com.epam.bankproject.bankproject.domain.impl.User;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.OperationEntity;
 import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.Role;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
@@ -54,7 +51,7 @@ public class OperationRepositoryTest {
         userEntity.setEmail("dolor.Donec@etmagnaPraesent.net");
         userEntity.setTelephone("380984895779");
         userEntity.setPassword("P@ssword97");
-        userEntity.setRole(Role.CLIENT);
+        userEntity.setRole(Role.ROLE_USER);
 
         AccountEntity deposit = new AccountEntity();
         deposit.setId(1);

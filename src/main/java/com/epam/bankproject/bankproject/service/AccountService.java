@@ -3,6 +3,7 @@ package com.epam.bankproject.bankproject.service;
 import com.epam.bankproject.bankproject.domain.Account;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import lombok.NonNull;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 public interface AccountService {
 
-    List<Account> findAllByOwnerId(Integer id, Pageable pageable);
+    Page<Account> findAllByOwnerId(Integer id, Pageable pageable);
 
     Account findById(Integer id);
 
@@ -19,5 +20,7 @@ public interface AccountService {
     List<Account> findAll(Pageable pageable);
 
     List<Account> findAll();
+
+    long countAllByOwnerId(Integer id);
 
 }

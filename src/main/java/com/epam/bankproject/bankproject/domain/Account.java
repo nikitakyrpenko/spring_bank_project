@@ -1,17 +1,13 @@
 package com.epam.bankproject.bankproject.domain;
 
-import com.epam.bankproject.bankproject.domain.impl.Operation;
-import com.epam.bankproject.bankproject.domain.impl.User;
 import com.epam.bankproject.bankproject.enums.AccountType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Date;
 
 @ToString
 @AllArgsConstructor
+@EqualsAndHashCode
 public abstract class Account implements OperationProcessable{
 
     @Getter
@@ -26,7 +22,6 @@ public abstract class Account implements OperationProcessable{
 
     @Getter
     private User owner;
-
 
     @Override
     public void processTransfer(Operation operation) {

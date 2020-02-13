@@ -1,7 +1,5 @@
-package com.epam.bankproject.bankproject.domain.impl;
+package com.epam.bankproject.bankproject.domain;
 
-import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.InterestChargeable;
 import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.ChargeType;
 import lombok.Builder;
@@ -10,21 +8,19 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
 import java.sql.Date;
 
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class CreditAccount extends Account implements InterestChargeable {
 
-    private static final int CREDIT_PERIOD                = 12;
+    private static final int CREDIT_PERIOD = 12;
     private static final int TOTAL_CREDIT_PERIOD_IN_MONTH = 36;
 
     @Getter
     private final Double limit;
 
     @Getter
-    @DecimalMin("0.001")
     private final Double creditRate;
 
     @Getter
@@ -44,13 +40,13 @@ public class CreditAccount extends Account implements InterestChargeable {
                          Double creditRate,
                          Double liability,
                          User owner,
-                         AccountType accountType){
-        super(id,expirationDate,balance,owner);
-        this.limit       = limit;
-        this.creditRate  = creditRate;
+                         AccountType accountType) {
+        super(id, expirationDate, balance, owner);
+        this.limit = limit;
+        this.creditRate = creditRate;
         this.accountType = accountType;
-        this.liability   = liability;
-        this.charge      = calculateCreditLiabilityPerMonth();
+        this.liability = liability;
+        this.charge = calculateCreditLiabilityPerMonth();
     }
 
     private Double percents() {

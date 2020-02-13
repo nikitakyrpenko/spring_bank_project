@@ -1,9 +1,9 @@
 package com.epam.bankproject.bankproject.service;
 
 import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.impl.Charge;
-import com.epam.bankproject.bankproject.domain.impl.CreditAccount;
-import com.epam.bankproject.bankproject.domain.impl.DepositAccount;
+import com.epam.bankproject.bankproject.domain.Charge;
+import com.epam.bankproject.bankproject.domain.CreditAccount;
+import com.epam.bankproject.bankproject.domain.DepositAccount;
 import com.epam.bankproject.bankproject.entity.ChargeEntity;
 import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.ChargeType;
