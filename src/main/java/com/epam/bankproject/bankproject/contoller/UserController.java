@@ -2,8 +2,10 @@ package com.epam.bankproject.bankproject.contoller;
 
 import com.epam.bankproject.bankproject.contoller.util.PageRequestFetcher;
 import com.epam.bankproject.bankproject.domain.Account;
+import com.epam.bankproject.bankproject.domain.CreditAccount;
+import com.epam.bankproject.bankproject.domain.DepositAccount;
 import com.epam.bankproject.bankproject.domain.User;
-import com.epam.bankproject.bankproject.entity.UserEntity;
+import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
@@ -53,6 +53,24 @@ public class UserController {
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.setViewName("accountsInfo");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "user/accountDetails")
+    public ModelAndView showAccountDetail(ModelAndView modelAndView,
+                                          @RequestParam(name = "id", required = true) String id){
+
+
+        Account accountById = accountService.findById(Integer.valueOf(id));
+        if (accountById.getAccountType() == AccountType.DEPOSIT){
+            DepositAccount depositAccount = (DepositAccount) accountById;
+            modelAndView.addObject("account", depositAccount);
+            modelAndView.setViewName("depositAccountDetails");
+        }else {
+            CreditAccount creditAccount = (CreditAccount) accountById;
+            modelAndView.addObject("account", creditAccount);
+            modelAndView.setViewName("creditAccountDetails");
+        }
         return modelAndView;
     }
 

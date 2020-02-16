@@ -33,7 +33,7 @@ public class AccountRepositoryTest {
     private AccountRepository accountRepository;
 
     @Test
-    public void whenSaveAccountEntity_thenReturnAccountEntity(){
+    public void whenSaveAccountEntity_thenReturnAccountEntity() {
         UserEntity me = new UserEntity();
         me.setId(1);
         me.setName("Freya");
@@ -47,16 +47,16 @@ public class AccountRepositoryTest {
         accountEntity.setAccountType(AccountType.DEPOSIT);
 
         AccountEntity save = accountRepository.save(accountEntity);
-        assertThat(save).isEqualToIgnoringGivenFields(accountEntity,"id");
+        assertThat(save).isEqualToIgnoringGivenFields(accountEntity, "id");
     }
 
     @Test
-    public void whenFindAll_ThenReturnAccountEntityCollection(){
+    public void whenFindAll_ThenReturnAccountEntityCollection() {
         assertFalse(accountRepository.findAll().isEmpty());
     }
 
     @Test
-    public void whenFindAllByOwnerId_thenReturnAccountEntity(){
+    public void whenFindAllByOwnerId_thenReturnAccountEntity() {
         UserEntity me = new UserEntity();
         me.setId(1);
         me.setName("Freya");
@@ -69,13 +69,13 @@ public class AccountRepositoryTest {
     }
 
     @Test
-    public void whenFindAllByOwnerIdPageable_thenReturnAccountEntity(){
+    public void whenFindAllByOwnerIdPageable_thenReturnAccountEntity() {
         UserEntity me = new UserEntity();
         me.setId(1);
         me.setName("Freya");
         me.setEmail("dolor.Donec@etmagnaPraesent.net");
 
-        List<AccountEntity> allByOwnerId = accountRepository.findAllByOwnerId(me.getId(), PageRequest.of(0,2)).getContent();
+        List<AccountEntity> allByOwnerId = accountRepository.findAllByOwnerId(me.getId(), PageRequest.of(0, 2)).getContent();
         System.out.println(allByOwnerId);
         assertTrue(allByOwnerId.size() <= 2);
 
@@ -85,7 +85,7 @@ public class AccountRepositoryTest {
 
 
     @Test
-    public void whenFindByOwnerIdNotExist_thenReturnEmptyIterable(){
+    public void whenFindByOwnerIdNotExist_thenReturnEmptyIterable() {
         UserEntity me = new UserEntity();
         me.setId(10000);
         me.setName("Freya");

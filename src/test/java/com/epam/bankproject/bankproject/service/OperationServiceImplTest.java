@@ -30,7 +30,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class OperationServiceImplTest {
 
     public static  final Operation NOT_VALID_OPERATION;

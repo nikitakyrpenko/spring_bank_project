@@ -5,6 +5,8 @@ import com.epam.bankproject.bankproject.entity.UserEntity;
 import com.epam.bankproject.bankproject.enums.Role;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.epam.bankproject.bankproject.service.mapper.impl.UserMapper;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,16 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
 @RunWith( SpringJUnit4ClassRunner.class )
-@SpringBootTest
 public class UserMapperTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    @Autowired
-    private Mapper<User, UserEntity> userMapper;
+    private Mapper<User, UserEntity> userMapper = new UserMapper();
 
     @Test
     public void whenMapEntityToDomain_thenReturnDomain(){

@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class UserServiceImpTest {
 
     @Rule
@@ -113,7 +112,6 @@ public class UserServiceImpTest {
 
     @Test
     public void whenUserServiceRegisterCorrect_thenRegisterSuccessfully(){
-        //TODO
         User user = User.builder()
                 .id(1)
                 .name("Jon")

@@ -1,6 +1,5 @@
 package com.epam.bankproject.bankproject.domain;
 
-import com.epam.bankproject.bankproject.domain.Account;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;

@@ -19,7 +19,7 @@ public class User implements UserDetails {
 
     private  Integer id;
 
-    @NonNull
+    @NotNull
     @NotEmpty
     private  String name;
 
@@ -27,22 +27,43 @@ public class User implements UserDetails {
     @NotEmpty
     private  String surname;
 
-    @NonNull
+    @NotNull
     @NotEmpty
     @Pattern(regexp = "([+]*38[(]?[0-9]{1,4}[)]?[-\\\\s./0-9]*)")
     private  String telephone;
 
-    @NonNull
+    @NotNull
     @NotEmpty
     @Pattern(regexp = "^[a-zA-Z0-9_!#$%&*+/=?`{}~^.-]+@[a-zA-Z0-9.-]+$")
     private  String email;
 
-    @NonNull
+    @NotNull
     @NotEmpty
-    @Pattern(regexp = "((?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%/]).{6,20})")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
     private  String password;
 
     private  Role role;
+
+    @NotNull(message = "password not matches")
+    private String passwordConfirmation;
+
+    public void setPassword(String password){
+        this.password = password;
+        checkPassword();
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation){
+        this.passwordConfirmation = passwordConfirmation;
+        checkPassword();
+    }
+
+    private void checkPassword() {
+        if(this.password == null || this.passwordConfirmation == null){
+            return;
+        }else if(!this.password.equals(passwordConfirmation)){
+            this.passwordConfirmation = null;
+        }
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

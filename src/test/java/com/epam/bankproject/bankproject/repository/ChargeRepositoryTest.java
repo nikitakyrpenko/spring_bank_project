@@ -24,7 +24,7 @@ public class ChargeRepositoryTest {
     private ChargeRepository chargeRepository;
 
     @Test
-    public void whenFindAllByAccountId_thenReturnChargesIterable(){
+    public void whenFindAllByAccountId_thenReturnChargesIterable() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(10);
 
@@ -35,11 +35,11 @@ public class ChargeRepositoryTest {
     }
 
     @Test
-    public void whenFindAllByAccountIdPageable_thenReturnChargesIterable(){
+    public void whenFindAllByAccountIdPageable_thenReturnChargesIterable() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(10);
 
-        List<ChargeEntity> charges = chargeRepository.findAllByAccountId(accountEntity.getId(), PageRequest.of(0,3));
+        List<ChargeEntity> charges = chargeRepository.findAllByAccountId(accountEntity.getId(), PageRequest.of(0, 3));
 
         assertTrue(charges.size() <= 3);
 

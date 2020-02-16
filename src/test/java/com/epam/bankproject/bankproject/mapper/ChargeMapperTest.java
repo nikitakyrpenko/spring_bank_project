@@ -1,114 +1,85 @@
 package com.epam.bankproject.bankproject.mapper;
 
-import com.epam.bankproject.bankproject.domain.Account;
-import com.epam.bankproject.bankproject.domain.Charge;
-import com.epam.bankproject.bankproject.domain.CreditAccount;
-import com.epam.bankproject.bankproject.domain.User;
+import com.epam.bankproject.bankproject.domain.*;
 import com.epam.bankproject.bankproject.entity.AccountEntity;
 import com.epam.bankproject.bankproject.entity.ChargeEntity;
-import com.epam.bankproject.bankproject.entity.UserEntity;
-import com.epam.bankproject.bankproject.enums.AccountType;
 import com.epam.bankproject.bankproject.enums.ChargeType;
-import com.epam.bankproject.bankproject.enums.Role;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;
+import com.epam.bankproject.bankproject.service.mapper.impl.ChargeMapper;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
-@SpringBootTest
 public class ChargeMapperTest {
 
-    @Autowired
-    private Mapper<Charge, ChargeEntity> chargeMapper;
-
-    @Autowired
+    @Mock
     private Mapper<Account, AccountEntity> accountMapper;
+
+    @InjectMocks
+    private ChargeMapper chargeMapper;
+
+    @After
+    public void resetMocks(){
+        reset(accountMapper);
+    }
 
     @Test
     public void whenMapDomainToEntity_thenReturnEntity() {
-        User me = User.builder()
-                .id(1)
-                .name("Jon")
-                .surname("Doe")
-                .email("jondoe@gmail.com")
-                .password("P@ssword97")
-                .telephone("380508321899")
-                .role(Role.ROLE_USER)
-                .build();
-
-        Account account = CreditAccount.builder()
-                .id(1)
-                .expirationDate(Date.valueOf("2021-03-12"))
-                .balance(1000.0)
-                .accountType(AccountType.CREDIT)
-                .owner(me)
-                .limit(1000.0)
-                .creditRate(0.1)
-                .liability(0.0)
-                .build();
 
         Charge charge = Charge.builder()
                 .id(1)
                 .chargeAmount(100.0)
                 .chargeType(ChargeType.CREDIT_ARRIVAL)
-                .account(account)
+                .account( DepositAccount.builder().build())
                 .build();
 
         ChargeEntity expected = new ChargeEntity();
         expected.setId(1);
         expected.setCharge(100.0);
         expected.setChargeType(ChargeType.CREDIT_ARRIVAL);
-        expected.setAccount(accountMapper.mapDomainToEntity(account));
+
+        when(accountMapper.mapDomainToEntity(any(Account.class))).thenReturn(new AccountEntity());
 
         ChargeEntity actual = chargeMapper.mapDomainToEntity(charge);
-        assertThat(actual).isEqualTo(expected);
+
+        verify(accountMapper,times(1)).mapDomainToEntity(any(Account.class));
+
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "account");
     }
 
     @Test
     public void whenMapEntityToDomain_thenReturnDomain() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(1);
-        userEntity.setName("Jon");
-        userEntity.setSurname("Doe");
-        userEntity.setEmail("jondoe@gmail.com");
-        userEntity.setPassword("P@ssword97");
-        userEntity.setTelephone("380508321899");
-        userEntity.setRole(Role.ROLE_USER);
-
-        AccountEntity accountEntity = new AccountEntity();
-        accountEntity.setId(1);
-        accountEntity.setExpirationDate(Date.valueOf("2021-03-12"));
-        accountEntity.setBalance(1000.0);
-        accountEntity.setCreditRate(0.2);
-        accountEntity.setCreditLimit(50000.0);
-        accountEntity.setCreditLiability(0.0);
-        accountEntity.setCreditCharge(1858.17);
-        accountEntity.setAccountType(AccountType.CREDIT);
-        accountEntity.setOwner(userEntity);
 
         ChargeEntity chargeEntity = new ChargeEntity();
         chargeEntity.setId(1);
         chargeEntity.setCharge(100.0);
         chargeEntity.setChargeType(ChargeType.CREDIT_ARRIVAL);
-        chargeEntity.setAccount(accountEntity);
+        chargeEntity.setAccount(new AccountEntity());
 
         Charge expected = Charge.builder()
                 .id(1)
                 .chargeAmount(100.0)
                 .chargeType(ChargeType.CREDIT_ARRIVAL)
-                .account(accountMapper.mapEntityToDomain(accountEntity))
+                .account(DepositAccount.builder().build())
                 .build();
+
+        when(accountMapper.mapEntityToDomain(any(AccountEntity.class))).thenReturn(DepositAccount.builder().build());
 
         Charge actual = chargeMapper.mapEntityToDomain(chargeEntity);
 
-        assertThat(actual).isEqualTo(expected);
+        verify(accountMapper,times(1)).mapEntityToDomain(any(AccountEntity.class));
+
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "account");
     }
 
 }

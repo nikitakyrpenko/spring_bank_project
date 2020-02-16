@@ -25,7 +25,6 @@ import java.util.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
 public class AccountServiceImplTest {
 
     @Rule
@@ -68,7 +67,6 @@ public class AccountServiceImplTest {
     public void whenAccountServiceFindAllPageable_thenReturnAccountCollection(){
         List<AccountEntity> expected = new ArrayList<>();
         Page<AccountEntity> expectedPage = new PageImpl(expected);
-        AccountEntity accountEntity = mock(AccountEntity.class);
 
         when(accountRepository.findAll(any(Pageable.class))).thenReturn(expectedPage);
 

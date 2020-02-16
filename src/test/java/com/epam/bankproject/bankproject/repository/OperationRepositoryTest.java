@@ -28,7 +28,7 @@ public class OperationRepositoryTest {
     private OperationRepository operationRepository;
 
     @Test
-    public void whenFindAllOperationsByAccountIdPageable_thenReturnListOfOperationEntities(){
+    public void whenFindAllOperationsByAccountIdPageable_thenReturnListOfOperationEntities() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(3);
 
@@ -38,12 +38,12 @@ public class OperationRepositoryTest {
 
         assertTrue(operations.size() <= 2);
 
-        assertEquals(1, operations.size() );
+        assertEquals(1, operations.size());
 
     }
 
     @Test
-    public void test(){
+    public void test() {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1);
         userEntity.setName("Freya");
@@ -86,14 +86,14 @@ public class OperationRepositoryTest {
     }
 
     @Test
-    public void whenFindAllOperationsByAccountId_thenReturnListOfOperationEntities(){
+    public void whenFindAllOperationsByAccountId_thenReturnListOfOperationEntities() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(3);
         assertEquals(5, operationRepository.findAllOperationsByAccountId(accountEntity.getId()).size());
     }
 
     @Test
-    public void whenFindAllByReceiverAccountId_thenReturnListOfOperationEntities(){
+    public void whenFindAllByReceiverAccountId_thenReturnListOfOperationEntities() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(3);
 
@@ -108,7 +108,7 @@ public class OperationRepositoryTest {
     }
 
     @Test
-    public void whenFindAllBySenderAccountId_thenReturnListOfOperationEntities(){
+    public void whenFindAllBySenderAccountId_thenReturnListOfOperationEntities() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(3);
 

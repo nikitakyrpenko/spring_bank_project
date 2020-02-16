@@ -15,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends PagingAndSortingRepository<AccountEntity, Integer> {
 
-
     Page<AccountEntity> findAllByOwnerId(@NonNull Integer id, Pageable pageable);
 
     List<AccountEntity> findAllByOwnerId(@NonNull Integer id);
