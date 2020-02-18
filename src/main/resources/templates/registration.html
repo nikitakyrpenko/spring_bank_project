@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general.html :: header">
+</head>
+<body>
+
+<!--Main container-->
+<div class="container-fluid back">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-4  form-cust">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}" th:text="#{label.login}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" selected="true" th:text="#{label.register}"></a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <!-- Registration Form-->
+                    <form th:action="@{/register}" th:object="${user}" method="post"
+                          oninput='passwordConfirm.setCustomValidity(passwordConfirm.value != password.value ? "Passwords do not match." : "")'>
+                        <div class="form-group">
+                            <label for="name" th:text="#{label.name}"></label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="surName" th:text="#{label.surname}"></label>
+                            <input type="text" class="form-control" id="surName" th:field="*{surname}">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" th:text="#{label.telephone}"></label>
+                            <input type="text" id="phone" class="form-control" th:field="*{telephone}">
+                            <div class="alert alert-danger collapse.show" style="background-color: red" role="alert"
+                                 th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">
+                                Wrong user credentials!
+                            </div>
+                            <small id="phoneHelp" class="form-text text-muted" th:text="#{label.telephone.pattern}">
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail" th:text="#{label.email}"></label>
+                            <input type="email" class="form-control" id="regEmail" aria-describedby="emailHelp"
+                                   th:field="*{email}">
+                            <div class="alert alert-danger collapse.show" style="background-color: red" role="alert"
+                                 th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword" th:text="#{label.password}"></label>
+                            <input type="password" class="form-control" id="regPassword" th:field="*{password}"
+                                   name="password">
+                            <div class="alert alert-danger collapse.show" style="background-color: red" role="alert"
+                                 th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPasswordConfirmation" th:text="#{label.confirmPassword}"></label>
+                            <input type="password" class="form-control" id="regPasswordConfirmation"
+                                   name="passwordConfirm">
+                            <div class="alert alert-danger collapse.show" style="background-color: red" role="alert"
+                                 th:if="${#fields.hasErrors('passwordConfirmation')}"
+                                 th:errors="*{passwordConfirmation}">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="registrationBtn"
+                                th:text="#{label.register}"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="general.html :: footer">
+    <!-- Footer goes here-->
+</div>
+</body>
+</html>

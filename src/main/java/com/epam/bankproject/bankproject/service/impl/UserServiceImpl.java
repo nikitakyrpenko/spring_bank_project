@@ -24,9 +24,7 @@ public class UserServiceImpl implements UserService{
     private PasswordEncoder passwordEncoder;
     private Mapper<User, UserEntity> userMapper;
 
-    //CONTROLLER ADVICE
 
-    //TODO CUSTOM EXCEPTIONS
     @Override
     public User login(@NotNull String email, @NotNull String password) {
         return userRepository.findByEmail(email)

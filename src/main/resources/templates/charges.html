@@ -1,0 +1,118 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general.html :: header">
+
+</head>
+<body>
+<div class="container-fluid ">
+    <div class="row h-100">
+        <div class="flex-column col-3  align-items-center bg-light">
+            <div th:object="${user}">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4" id="profile">
+                        <img src="../images/profile.png" width="50" height="50" alt="profile">
+                    </div>
+                </div>
+                <hr class="hr-gray">
+                <div class="row d-flex row-cust row-mr-top">
+                    <div class="col-4 " id="name">
+                        <img src="../images/name.png" width="24" height="24" alt="profile" th:text="${user.name}">
+
+                    </div>
+                    <div class="col" id="surname" th:text="${user.surname}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row row-cust  row-mr-top">
+                    <div class="col" id="phoneNumber">
+                        <img src="../images/phone.png" width="24" height="24" alt="profile" th:text="${user.telephone}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row row-cust row-mr-top">
+                    <div class="col" id="email">
+                        <img src="../images/mail.png" width="24" height="24" alt="profile" th:text="${user.email}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row d-flex justify-content-center">
+                <div class="col-4" id="profile">
+                    <img src="../images/bankbook.png" width="50" height="50" alt="profile">
+                </div>
+            </div>
+            <hr>
+            <div th:object="${account}">
+                <div class="row row-cust">
+                    <div class="col-4 " th:text="#{label.expirationDate}"></div>
+                    <div class="col-6" id="depExpiration" th:text="${account.getExpirationDate()}"></div>
+                </div>
+                <hr>
+                <hr>
+                <div class="row row-cust">
+                    <div class="col-4" th:text="#{label.balance}"></div>
+                    <div class="col-6" id="depBalance" th:text="${account.getBalance()}"></div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="col flex-column cl">
+            <!--Operations/Charges navigation pills-->
+            <div class="container-fluid">
+                <div class="row bg-light ">
+                    <div class="col">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   th:href="@{/user/accountDetails(page=0, id=${account.id}, type=${account.accountType})}"
+                                   th:text="#{button.operations}"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-selected="true" th:text="#{button.charges}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-center  h-75 align-self-center">
+                    <div class="col-7">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-charges" role="tabpanel"
+                                 aria-labelledby="pills-charges-tab">
+                                <!--Deposit Card-->
+                                <div class="card card-cust" th:each="charge : ${page.content}">
+                                    <h6 class="card-header" th:text="#{label.charge}"></h6>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.charge}"></div>
+                                        <div class="col-6" id="chargeAmount" th:text="${charge.chargeAmount}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust collapse">
+                                        <div class="col-4 ">Charge type:</div>
+                                        <div class="col-6" id="chargeType" th:text="${charge.chargeType}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-self-end row-bott justify-content-center">
+                            <div class="col-2 cl">
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group"
+                                         th:each="pageNumber : ${pageNumbers}">
+                                        <a th:href="@{/user/accounts(page=${pageNumber - 1})}"
+                                           th:text="${pageNumber}"
+                                           th:class="${pageNumber==page.number + 1} ? active"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="general.html :: footer">
+    <!-- Footer -->
+</div>
+</body>
+</html>

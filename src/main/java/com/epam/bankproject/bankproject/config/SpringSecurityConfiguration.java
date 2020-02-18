@@ -11,8 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
 
 import java.util.Locale;
 
@@ -31,7 +30,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/css/**","/js/**","/images/**","/international/**").permitAll().anyRequest().permitAll()
+                .antMatchers("/css/**","/js/**","/images/**").permitAll().anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

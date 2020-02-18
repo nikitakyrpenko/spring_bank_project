@@ -16,10 +16,10 @@ public interface OperationRepository extends PagingAndSortingRepository<Operatio
     @Query(value = "SELECT o FROM OperationEntity o WHERE o.receiverAccount.id = :id or o.senderAccount.id = :id")
     List<OperationEntity> findAllOperationsByAccountId(@Param("id") Integer id, Pageable pageable);
 
-    @Query(value = "SELECT o FROM OperationEntity o WHERE o.receiverAccount.id = :id or o.senderAccount.id = :id")
-    List<OperationEntity> findAllOperationsByAccountId(@Param("id") Integer id);
-
     List<OperationEntity> findAllByReceiverAccountId(Integer id, Pageable pageable);
 
     List<OperationEntity> findAllBySenderAccountId(Integer id, Pageable pageable);
+
+    @Query(value = "SELECT count (o) FROM OperationEntity o WHERE o.receiverAccount.id = :id or o.senderAccount.id = :id")
+    long countAllByReceiverAccountIdOrSenderAccountId(Integer id);
 }

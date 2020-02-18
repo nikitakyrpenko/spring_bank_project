@@ -1,0 +1,185 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general.html :: header">
+
+</head>
+<body>
+<div class="container-fluid"
+     th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+    <div class="row h-100">
+        <div class="flex-column col-3  align-items-center bg-light ">
+            <div th:object="${user}">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4" id="profile">
+                        <img src="../images/profile.png" width="50" height="50" alt="profile">
+                    </div>
+                </div>
+                <hr class="hr-gray">
+                <div class="row d-flex row-cust row-mr-top">
+                    <div class="col-4 " id="name">
+                        <img src="../images/name.png" width="24" height="24" alt="profile" th:text="${user.name}">
+
+                    </div>
+                    <div class="col" id="surname" th:text="${user.surname}">
+
+                    </div>
+                </div>
+                <hr>
+                <div class="row row-cust  row-mr-top">
+                    <div class="col" id="phoneNumber">
+                        <img src="../images/phone.png" width="24" height="24" alt="profile" th:text="${user.telephone}">
+                    </div>
+                </div>
+
+                <hr>
+                <!--                -->
+
+                <div class="row row-cust row-mr-top">
+                    <div class="col" id="email">
+                        <img src="../images/mail.png" width="24" height="24" alt="profile" th:text="${user.email}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div th:object="${account}">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4" id="profile">
+                        <img src="../images/bankbook.png" width="50" height="50" alt="profile">
+                    </div>
+                </div>
+                <hr>
+                <div class="row row-cust">
+                    <div class="col-5 " th:text="#{label.expirationDate}"></div>
+                    <div class="col-6" id="crExpiration" th:text="${account.expirationDate}"></div>
+                </div>
+                <hr>
+                <div class="row row-cust">
+                    <div class="col-5" th:text="#{label.balance}"></div>
+                    <div class="col-6" id="crBalance" th:text="${account.balance}"></div>
+                </div>
+                <hr>
+                <div class="row row-cust">
+                    <div class="col-5" th:text="#{label.limit}"></div>
+                    <div class="col-6" id="crLimit" th:text="${account.limit}"></div>
+                </div>
+                <hr>
+                <div class="row row-cust">
+                    <div class="col-5" th:text="#{label.rate}"></div>
+                    <div class="col-6" id="crRate" th:text="${account.creditRate * 100 + '%'}"></div>
+                </div>
+                <hr>
+                <div class="row row-cust">
+                    <div class="col-5" th:text="#{label.charge}"></div>
+                    <div class="col-6" id="crCharge" th:text="${account.charge}"></div>
+                </div>
+                <div class="row row-cust collapse">
+                    <div class="col-5">ID:</div>
+                    <div class="col-6" id="testId" th:text="${account.id}">13</div>
+                </div>
+                <div class="row align-self-end row-bott justify-content-center">
+                    <div class="col-8 cl">
+                        <a class="btn btn-primary "
+                           th:href="@{/user/transaction(accountid = ${account.getId()})}"
+                           th:text="#{button.creteOperation}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col flex-column cl">
+            <!--Operations/Charges navigation pills-->
+            <div class="container-fluid">
+                <div class="row bg-light ">
+                    <div class="col">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active"
+                                   aria-selected="true" th:text="#{button.operations}"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-charges-tab"
+                                   th:href="@{/user/charges(accountid=${account.id},page=0,type=${account.getAccountType()})}"
+                                   aria-selected="false" th:text="#{button.charges}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-center  h-75 align-self-center">
+                    <div class="col-7">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-operations" role="tabpanel"
+                                 aria-labelledby="pills-operations-tab" th:each="operation : ${page.content}">
+                                <!--New Operation card-->
+                                <div class="card card-cust colored" style="">
+                                    <h6 class="card-header" th:text="#{label.operation}"></h6>
+                                    <div class="row row-cust">
+                                        <div class="col-4" th:text="#{label.purpose}"></div>
+                                        <div class="col-6" id="purpose" th:text="${operation.purpose}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.transfer}"></div>
+                                        <div class="col-6" id="transfer" th:text="${operation.transfer}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.date}"></div>
+                                        <div class="col-6" id="date" th:text="${operation.dateOfOperation}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust ">
+                                        <div class="col-4 " th:text="#{label.receiver}"></div>
+                                        <div class="col-6 " id="senderName" name="senderName"
+                                             th:text="${operation.receiver.owner.name +' '+ operation.receiver.owner.surname}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust ">
+                                        <div class="col-4 " th:text="#{label.sender}"></div>
+                                        <div class="col-6 " id="recieverName" name="recieverName"
+                                             th:text="${operation.sender.owner.name +' '+ operation.sender.owner.surname}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust collapse">
+                                        <div class="col-4 " th:text="#{label.sender}"></div>
+                                        <div class="col-6 senderID" id="senderID" name="senderName"
+                                             th:text="${operation.sender.id}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust collapse">
+                                        <div class="col-4 " th:text="#{label.receiver}"></div>
+                                        <div class="col-6 recieverID" id="recieverID" name="recieverName"
+                                             th:text="${operation.receiver.id}"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row align-self-end row-bott justify-content-center">
+                            <div class="col-6 cl">
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group"
+                                         th:each="pageNumber : ${pageNumbers}">
+                                        <a th:href="${urlBuilder.replaceQueryParam('page', pageNumber - 1).toUriString()}"
+                                           th:text="${pageNumber}"
+                                           th:class="${pageNumber==page.number + 1} ? active"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    let charge = +document.getElementById('crCharge').textContent;
+    document.getElementById('crCharge').textContent = charge.toFixed(2);
+</script>
+<div th:insert="general.html :: footer">
+    <!-- Footer -->
+</div>
+</body>
+</html>

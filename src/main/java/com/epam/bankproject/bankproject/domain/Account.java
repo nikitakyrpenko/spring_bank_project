@@ -11,7 +11,8 @@ import java.sql.Date;
 public abstract class Account implements OperationProcessable{
 
     @Getter
-    private final Integer id;
+    @Setter
+    private Integer id;
 
     @Getter
     private final Date expirationDate;

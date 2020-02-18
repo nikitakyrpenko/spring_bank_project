@@ -1,0 +1,116 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general.html :: header">
+
+</head>
+<body>
+<!--Side Profile-->
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="flex-column col-3  align-items-center bg-light " th:object="${user}">
+            <div class="row d-flex justify-content-center">
+                <div class="col-4" id="profile">
+                    <img src="../images/profile.png" width="50" height="50" alt="profile">
+                </div>
+            </div>
+            <hr class="hr-gray">
+            <div class="row d-flex row-cust row-mr-top">
+                <div class="col-4 " id="name">
+                    <img src="../images/name.png" width="24" height="24" alt="profile" th:text="${user.name}">
+
+                </div>
+                <div class="col" id="surname" th:text="${user.surname}">
+
+                </div>
+            </div>
+            <div class="row row-cust  row-mr-top">
+                <div class="col" id="phoneNumber">
+                    <img src="../images/phone.png" width="24" height="24" alt="profile" th:text="${user.telephone}">
+                </div>
+            </div>
+            <div class="row row-cust row-mr-top">
+                <div class="col" id="email">
+                    <img src="../images/mail.png" width="24" height="24" alt="profile" th:text="${user.email}">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+            </div>
+        </div>
+        <div class="col">
+            <!--Header-->
+            <div class="row bg-light header-cust">
+            </div>
+            <div class="row h-75 justify-content-center align-items-center">
+                <div class="col-7">
+                    <div class="tab-content" id="pills-tabContent">
+                        <!--New card-->
+                        <form th:action="@{/user/transaction}" th:object="${operation}" method="post">
+                            <div class="card card-cust">
+                                <div class="collapse">
+                                    <input th:text="${operation.senderId}" th:field="*{senderId}">
+                                </div>
+                                <h6 class="card-header">New Transaction</h6>
+                                <div class="row row-cust d-flex align-items-center">
+                                    <div class="col-4 ">Card number:</div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="cardNumber"
+                                               placeholder="Enter card number" value="" th:field="*{receiverId}">
+                                        <div class="alert alert-danger collapse.show" style="background-color: red"
+                                             role="alert"
+                                             th:if="${#fields.hasErrors('receiverId')}" th:errors="*{error}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row row-cust d-flex align-items-center">
+                                    <div class="col-4 ">Purpose:</div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="purpose" placeholder="Enter purpose"
+                                               value="" th:field="*{purpose}">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row row-cust d-flex align-items-center">
+                                    <div class="col-4">Transfer sum:</div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="transactionSum"
+                                               placeholder="Enter the transfer sum" value="" th:field="*{transfer}">
+                                        <div class="alert alert-danger collapse.show" style="background-color: red"
+                                             role="alert"
+                                             th:if="${#fields.hasErrors('transfer')}" th:errors="*{error}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <!--Alerts. Changhe collapse to collapse.show to see the alerts-->
+                                <div class="alert alert-success collapse" role="alert" id="success">
+                                    Transaction is successfull!
+                                </div>
+                                <div class="alert alert-danger collapse" role="alert" id="error"
+                                     th:if="${error != null}" th:class="'alert alert-danger collapse.show'">
+                                    Error! Try again.
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <button class="btn btn-primary btn-cust">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!--Card ends here ^-->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:insert="general.html :: footer">
+    <!-- Footer goes here-->
+</div>
+</body>
+</html>

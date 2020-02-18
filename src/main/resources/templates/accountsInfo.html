@@ -40,47 +40,46 @@
             <div class="container-fluid">
                 <div class="row justify-content-center h-100">
                     <div class="col-7">
-                        <div class="tab-content" id="pills-tabContent" th:each="account : ${accountPage.content}">
+                        <div class="tab-content" id="pills-tabContent" th:each="account : ${page.content}">
                             <!--Credit Card Panel-->
                             <!--New card-->
                             <div class="card card-cust">
-                                <h6 class="card-header">Account Information</h6>
+                                <h6 class="card-header" th:text="#{label.accountInfo}"></h6>
                                 <div class="row row-cust">
-                                    <div class="col-4 ">Expiration date:</div>
+                                    <div class="col-4 " th:text="#{label.expirationDate}"></div>
                                     <div class="col-6" id="crExpiration" th:text="${account.getExpirationDate()}">Your
                                         text
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row row-cust">
-                                    <div class="col-4 ">Holder:</div>
-                                    <div class="col-6" id="crHolder" th:text="${account.getOwner().getSurname()}">Your
-                                        text
+                                    <div class="col-4 " th:text="#{label.holder}"></div>
+                                    <div class="col-6" id="crHolder" th:text="${account.getOwner().getSurname()}">
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row row-cust">
-                                    <div class="col-4">Balance:</div>
-                                    <div class="col-6" id="crBalance" th:text="${account.getBalance()}">Your text</div>
+                                    <div class="col-4" th:text="#{label.balance}"></div>
+                                    <div class="col-6" id="crBalance" th:text="${account.getBalance()}"></div>
                                 </div>
 
                                 <hr>
                                 <div class="row justify-content-center">
                                     <div class="col-3">
-                                        <a href="#" class="btn btn-primary btn-cust" th:href="@{/user/accountDetails(id=${account.getId()})}">Details</a>
+                                        <a href="#" class="btn btn-primary btn-cust" th:href="@{/user/accountDetails(page='0',type=${account.getAccountType()},id=${account.getId()})}" th:text="#{button.detail}"></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <!--Card ends here ^-->
-                        <div class="row align-self-end row-bott justify-content-center">
                             <div class="col-2 cl">
                                 <div class="btn-toolbar" role="toolbar">
                                     <div class="btn-group mr-2" role="group" aria-label="First group"
                                          th:each="pageNumber : ${pageNumbers}">
                                         <a th:href="@{/user/accounts(page=${pageNumber - 1})}"
                                            th:text="${pageNumber}"
-                                           th:class="${pageNumber==accountPage.number + 1} ? active"></a>
+                                           th:class="${pageNumber==page.number + 1} ? active"></a>
                                     </div>
                                 </div>
                             </div>

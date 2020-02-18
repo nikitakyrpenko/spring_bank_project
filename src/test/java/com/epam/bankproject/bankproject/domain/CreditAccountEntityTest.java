@@ -50,15 +50,4 @@ public class CreditAccountEntityTest {
     }
 
 
-    //TODO HOW TO VALIDATE DOUBLE MIN
-   /* @Test(expected = IllegalArgumentException.class)
-    public void getChargeThrowIllegalArgumentExceptionIfCreditRateLessThanZero(){
-        CreditAccount creditAccount = CreditAccount.builder()
-                .limit(0.0)
-                .rate(0.0)
-                .build();
-        creditAccount.getCharge();
-    }
-*/
-
 }

@@ -27,7 +27,7 @@ import java.sql.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-@RunWith( SpringJUnit4ClassRunner.class )
+@RunWith(SpringJUnit4ClassRunner.class)
 public class OperationMapperTest {
 
     @Mock
@@ -37,12 +37,12 @@ public class OperationMapperTest {
     private OperationMapper operationMapper;
 
     @After
-    public void resetMocks(){
+    public void resetMocks() {
         reset(accountMapper);
     }
 
     @Test
-    public void whenMapDomainToEntity_thenReturnEntity(){
+    public void whenMapDomainToEntity_thenReturnEntity() {
         Operation operation = Operation.builder()
                 .id(1)
                 .transfer(10.99)
@@ -54,7 +54,6 @@ public class OperationMapperTest {
                         .limit(100.0)
                         .build())
                 .build();
-
 
 
         OperationEntity expected = new OperationEntity();
@@ -69,13 +68,13 @@ public class OperationMapperTest {
 
         OperationEntity actual = operationMapper.mapDomainToEntity(operation);
 
-        verify(accountMapper,atLeastOnce()).mapDomainToEntity(any(Account.class));
+        verify(accountMapper, atLeastOnce()).mapDomainToEntity(any(Account.class));
 
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "senderAccount","receiverAccount");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "senderAccount", "receiverAccount");
     }
 
     @Test
-    public void whenMapEntityToDomain_thenReturnDomain(){
+    public void whenMapEntityToDomain_thenReturnDomain() {
 
         OperationEntity operationEntity = new OperationEntity();
         operationEntity.setId(1);
@@ -97,9 +96,9 @@ public class OperationMapperTest {
         when(accountMapper.mapEntityToDomain(any(AccountEntity.class))).thenReturn(DepositAccount.builder().build());
         Operation actual = operationMapper.mapEntityToDomain(operationEntity);
 
-        verify(accountMapper,atLeastOnce()).mapEntityToDomain(any(AccountEntity.class));
+        verify(accountMapper, atLeastOnce()).mapEntityToDomain(any(AccountEntity.class));
 
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "sender","receiver");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "sender", "receiver");
     }
 
 }

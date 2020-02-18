@@ -89,7 +89,8 @@ public class OperationRepositoryTest {
     public void whenFindAllOperationsByAccountId_thenReturnListOfOperationEntities() {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(3);
-        assertEquals(5, operationRepository.findAllOperationsByAccountId(accountEntity.getId()).size());
+        List<OperationEntity> allOperationsByAccountId = operationRepository.findAllOperationsByAccountId(accountEntity.getId(),PageRequest.of(0,5));
+        assertEquals(5, allOperationsByAccountId.size());
     }
 
     @Test

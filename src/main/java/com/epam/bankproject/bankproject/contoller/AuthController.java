@@ -40,9 +40,5 @@ public class AuthController {
         modelAndView.setViewName("login-error.html");
         return modelAndView;
     }
-
-   /* @GetMapping(value = "/international")
-    public String getInternationalPage() {
-        return "login";*/
 }
 

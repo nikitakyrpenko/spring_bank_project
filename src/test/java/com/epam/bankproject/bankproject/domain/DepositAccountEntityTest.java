@@ -48,13 +48,5 @@ public class DepositAccountEntityTest {
     public void getChargeShouldReturnChargeValueByDepositAmountAndDepositRate(){
         assertEquals(expectedCharge, depositAccount.getCharge(),0.1);
     }
-    /*@Test(expected = IllegalArgumentException.class)
-    public void getChargeShouldThrowIllegalArgumentExceptionIfDepositRateLessThenZero(){
-        DepositAccount illegalDepositAccount = DepositAccount.builder()
-                .balance(1000.0)
-                .rate(-0.1)
-                .build();
-        illegalDepositAccount.getCharge();
-    }*/
 
 }

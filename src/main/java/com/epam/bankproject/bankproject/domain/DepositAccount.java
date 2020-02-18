@@ -15,7 +15,6 @@ public class DepositAccount extends Account implements InterestChargeable {
     public final Double depositAmount;
 
     @Getter
-    @DecimalMin("0.001")
     public final Double rate;
 
     @Getter

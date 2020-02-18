@@ -1,33 +1,22 @@
 package com.epam.bankproject.bankproject.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-
-import javax.validation.constraints.NotEmpty;
+import lombok.*;
 import java.sql.Date;
 
 @Data
 @Builder(toBuilder = true)
+@AllArgsConstructor
 public class Operation {
 
-    private final Integer id;
+    private  Integer id;
 
-    @NonNull
-    @NotEmpty
-    private final String purpose;
+    private  String purpose;
 
-    @NonNull
-    @NotEmpty
-    private final Double transfer;
+    private  Double transfer;
 
-    @NonNull
-    @NotEmpty
-    private final Date dateOfOperation;
+    private  Date dateOfOperation;
 
-    @NonNull
-    private final Account sender;
+    private  Account sender;
 
-    @NotEmpty
-    private final Account receiver;
+    private  Account receiver;
 }

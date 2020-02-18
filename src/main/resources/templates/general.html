@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/main.css}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Banking</title>
+</head>
+<body>
+<div>
+    <!-- Header-->
+    <header>
+        <nav class="navbar navbar-expand navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/user/accounts(page=0)}">
+                <img src="../images/logo1.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+                YourBanking
+            </a>
+            <div class="navbar-collapse justify-content-end" id="navbarNavAltMarkup"
+                 th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                <div class="navbar-nav">
+                    <a th:href="${urlBuilder.replaceQueryParam('lang', 'UKR').toUriString()}">
+                        <img src="../images/UKR.png" alt="" style="margin-right: 10px">
+                    </a>
+                    <a th:href="${urlBuilder.replaceQueryParam('lang', 'US').toUriString()}">
+                        <img src="../images/USA.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <hr style="margin: 0">
+    </header>
+</div>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small" th:fragment="footer">
+    <div class="footer-copyright text-center py-2 bg-info text-white fixed-bottom">© 2020 Copyright
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{../js/coloring.js}"></script>
+</footer>
+</body>
+</html>

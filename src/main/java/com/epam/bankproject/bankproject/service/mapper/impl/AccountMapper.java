@@ -27,11 +27,10 @@ public class AccountMapper implements Mapper<Account, AccountEntity> {
         accountEntity.setExpirationDate(domain.getExpirationDate());
         accountEntity.setOwner(userMapper.mapDomainToEntity(domain.getOwner()));
 
-        if (domain.getAccountType() == AccountType.DEPOSIT){
+        if (domain.getAccountType() == AccountType.DEPOSIT) {
             DepositAccount depositAccount = (DepositAccount) domain;
             accountEntity.setDepositRate(depositAccount.getRate());
-        }
-        else if (domain.getAccountType() == AccountType.CREDIT){
+        } else if (domain.getAccountType() == AccountType.CREDIT) {
             CreditAccount creditAccount = (CreditAccount) domain;
             accountEntity.setCreditCharge(creditAccount.getCharge());
             accountEntity.setCreditLimit(creditAccount.getLimit());

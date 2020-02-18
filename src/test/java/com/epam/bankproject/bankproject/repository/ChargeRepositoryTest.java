@@ -39,7 +39,7 @@ public class ChargeRepositoryTest {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setId(10);
 
-        List<ChargeEntity> charges = chargeRepository.findAllByAccountId(accountEntity.getId(), PageRequest.of(0, 3));
+        List<ChargeEntity> charges = chargeRepository.findAllByAccountId(accountEntity.getId(), PageRequest.of(0, 3)).getContent();
 
         assertTrue(charges.size() <= 3);
 
