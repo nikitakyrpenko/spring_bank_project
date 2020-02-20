@@ -1,0 +1,108 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general.html :: header">
+
+</head>
+<body>
+<div class="container-fluid ">
+    <div class="row h-100">
+        <div class="flex-column col-3  align-items-center bg-light">
+           <div th:object="${user}">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4" id="profile">
+                        <img src="../images/profile.png" width="50" height="50" alt="profile">
+                    </div>
+                </div>
+                <hr class="hr-gray">
+                <div class="row d-flex row-cust row-mr-top">
+                    <div class="col-4 " id="name">
+                        <img src="../images/name.png" width="24" height="24" alt="profile" th:text="${user.name}">
+
+                    </div>
+                    <div class="col" id="surname" th:text="${user.surname}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row row-cust  row-mr-top">
+                    <div class="col" id="phoneNumber">
+                        <img src="../images/phone.png" width="24" height="24" alt="profile" th:text="${user.telephone}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row row-cust row-mr-top">
+                    <div class="col" id="email">
+                        <img src="../images/mail.png" width="24" height="24" alt="profile" th:text="${user.email}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+        </div>
+        <div class="col flex-column cl">
+            <!--Operations/Charges navigation pills-->
+            <div class="container-fluid">
+                <div class="row bg-light ">
+                    <div class="col">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-center  h-75 align-self-center">
+                    <div class="col-7">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-charges" role="tabpanel"
+                                 aria-labelledby="pills-charges-tab">
+
+                                <div class="card card-cust" th:each="request : ${page.content}">
+                                    <h6 class="card-header" th:text="#{label.requests}"></h6>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.name}"></div>
+                                        <div class="col-6" id="chargeAmount" th:text="${request.owner.name + ' ' + request.owner.surname}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.telephone}"></div>
+                                        <div class="col-6" id="chargeAmount" th:text="${request.owner.telephone}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.email}"></div>
+                                        <div class="col-6" id="chargeAmount" th:text="${request.owner.email}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row row-cust">
+                                        <div class="col-4 " th:text="#{label.requestType}"></div>
+                                        <div class="col-6" id="chargeType" th:text="${request.accountType}"></div>
+                                    </div>
+                                    <hr>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3">
+                                            <a  class="btn btn-primary btn-cust" th:href="@{/admin/accountRegistration(userId=${user.id}, type=${request.accountType}, requestId = ${request.id})}" th:text="#{button.createAccount}"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-self-end row-bott justify-content-center">
+                            <div class="col-2 cl">
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group"
+                                         th:each="pageNumber : ${pageNumbers}">
+                                        <a th:href="@{/admin/requests(page=${pageNumber - 1})}"
+                                           th:text="${pageNumber}"
+                                           th:class="${pageNumber==page.number + 1} ? active"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="general.html :: footer">
+    <!-- Footer -->
+</div>
+</body>
+</html>

@@ -27,7 +27,7 @@ public class CreditAccount extends Account implements InterestChargeable {
     private final AccountType accountType;
 
     @Getter
-    private final Double charge;
+    private  Double charge;
 
     @Getter
     private Double liability;
@@ -42,6 +42,7 @@ public class CreditAccount extends Account implements InterestChargeable {
                          User owner,
                          AccountType accountType) {
         super(id, expirationDate, balance, owner);
+        super.setBalance(limit);
         this.limit = limit;
         this.creditRate = creditRate;
         this.accountType = accountType;
@@ -66,4 +67,5 @@ public class CreditAccount extends Account implements InterestChargeable {
                 .account(this)
                 .build();
     }
+
 }

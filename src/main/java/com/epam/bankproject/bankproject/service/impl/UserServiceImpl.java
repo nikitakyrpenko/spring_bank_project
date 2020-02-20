@@ -34,6 +34,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User findById(Integer id) {
+        return userRepository
+                .findById(id)
+                .map(userMapper::mapEntityToDomain)
+                .orElseThrow();
+    }
+
+    @Override
     public void register(@NotNull User user) {
         user = user.toBuilder().role(Role.ROLE_USER).build();
         userRepository.findByEmail(user.getEmail())
@@ -60,4 +68,6 @@ public class UserServiceImpl implements UserService{
         });
         return user;
     }
+
+
 }

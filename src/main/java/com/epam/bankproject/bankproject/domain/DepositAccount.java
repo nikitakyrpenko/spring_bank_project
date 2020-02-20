@@ -9,16 +9,20 @@ import java.sql.Date;
 
 @ToString(callSuper = true)
 @EqualsAndHashCode
+
 public class DepositAccount extends Account implements InterestChargeable {
 
     @Getter
-    public final Double depositAmount;
+    @Setter
+    private Double depositAmount;
 
     @Getter
-    public final Double rate;
+    @Setter
+    private Double rate;
 
     @Getter
-    public final AccountType accountType;
+    @Setter
+    private AccountType accountType;
 
     @Builder
     public DepositAccount(Integer id,

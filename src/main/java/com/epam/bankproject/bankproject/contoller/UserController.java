@@ -3,54 +3,56 @@ package com.epam.bankproject.bankproject.contoller;
 import com.epam.bankproject.bankproject.contoller.util.*;
 import com.epam.bankproject.bankproject.domain.*;
 import com.epam.bankproject.bankproject.enums.AccountType;
-import com.epam.bankproject.bankproject.service.AccountService;
-import com.epam.bankproject.bankproject.service.ChargeService;
-import com.epam.bankproject.bankproject.service.OperationService;
-import lombok.AllArgsConstructor;
+import com.epam.bankproject.bankproject.service.*;
 import lombok.RequiredArgsConstructor;
+import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.sql.Date;
-import java.util.Objects;
-import java.util.function.BiFunction;
+import java.util.Collection;
 import java.util.function.Function;
-import java.util.function.Supplier;
+
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Controller
+@PreAuthorize("hasRole(T(com.epam.bankproject.bankproject.enums.Role).ROLE_USER)")
 public class UserController {
     private static final int PAGE_SIZE = 2;
 
+    private final UserService userService;
+    private final RequestService requestService;
     private final AccountService accountService;
     private final OperationService operationService;
     private final ChargeService chargeService;
     private final AuthenticationFacade authenticationFacade;
 
 
+
     @GetMapping(value = "user/accounts")
     public ModelAndView showUsersAccounts(@RequestParam(value = "page", required = false) String stringPage) {
 
-        Integer userId = authenticationFacade.getAuthenticatedUser().getId();
+        User user = authenticationFacade.getAuthenticatedUser();
 
         ModelAndViewBuilder modelAndViewBuilder = new ModelAndViewBuilder();
 
         modelAndViewBuilder
                 .withObjectBySupplier("user", authenticationFacade::getAuthenticatedUser)
-                .withPageableByFunction("page",
+                .withObjectBySupplier("newAccount", () -> new RequestData(user.getId()))
+                .withPageableByBiFunction("page",
                         accountService::findAllByOwnerId,
-                        userId,
-                        computeCurrentPage(stringPage, accountService::countAllByOwnerId, userId));
-
+                        user.getId(),
+                        computeCurrentPage(stringPage, accountService::countAllByOwnerId, user.getId()));
 
         return modelAndViewBuilder.buildWithName("accountsInfo");
     }
@@ -70,7 +72,7 @@ public class UserController {
                     Account account = accountService.findById(id);
                     return account.getAccountType() == AccountType.DEPOSIT ? (DepositAccount) account : (CreditAccount) account;
                 })
-                .withPageableByFunction("page",
+                .withPageableByBiFunction("page",
                         operationService::findAllOperationsByAccountId,
                         id,
                         computeCurrentPage(stringPage, operationService::countAllByReceiverAccountIdOrSenderAccountId, id));
@@ -93,7 +95,7 @@ public class UserController {
         modelAndViewBuilder
                 .withObjectBySupplier("user", authenticationFacade::getAuthenticatedUser)
                 .withObjectBySupplier("account", () -> accountService.findById(id))
-                .withPageableByFunction("page",
+                .withPageableByBiFunction("page",
                         chargeService::findAllByAccountId,
                         id,
                         computeCurrentPage(stringPage, chargeService::countAllByAccountId, id));
@@ -139,10 +141,25 @@ public class UserController {
 
         return modelAndViewBuilder
                 .buildWithName("redirect:/user/accountDetails?page=0&id=" + save.getSender().getId() + "&type=" + save.getSender().getAccountType());
+    }
 
+    @GetMapping(value = "/user/requestAccount")
+    public ModelAndView saveAccountRequest(@RequestParam(name = "userId") Integer id,
+                                           @RequestParam(name = "type") String type){
 
+        User user = userService.findById(id);
+
+        Request request = Request
+                .builder()
+                .owner(user)
+                .accountType(AccountType.valueOf(type))
+                .build();
+
+        requestService.save(request);
+        return new ModelAndView("redirect:/user/accounts?page=0");
 
     }
+
 
     private Operation mapOperationDataToOperation(OperationData operationData) {
         return Operation.builder()

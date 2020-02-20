@@ -32,7 +32,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"></div>
+                <div class="col">
+                    <div class="row align-items-end h-50 row-cust justify-content-center">
+                        <div class="col-8">
+                            <a th:href="@{/user/requestAccount(userId=${user.id}, type='DEPOSIT')}" class="btn btn-primary btn-cust" th:text="#{label.newDepositAccount}"></a>
+                        </div>
+                    </div>
+                    <div class="row row-cust justify-content-center row-mr-top">
+                        <div class="col-8">
+                            <a th:href="@{/user/requestAccount(userId=${user.id}, type='CREDIT')}" class="btn btn-primary btn-cust" th:text="#{label.newCreditAccount}"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col flex-column cl">
@@ -66,21 +77,22 @@
                                 <hr>
                                 <div class="row justify-content-center">
                                     <div class="col-3">
-                                        <a href="#" class="btn btn-primary btn-cust" th:href="@{/user/accountDetails(page='0',type=${account.getAccountType()},id=${account.getId()})}" th:text="#{button.detail}"></a>
+                                        <a href="#" class="btn btn-primary btn-cust"
+                                           th:href="@{/user/accountDetails(page='0',type=${account.getAccountType()},id=${account.getId()})}"
+                                           th:text="#{button.detail}"></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!--Card ends here ^-->
-                            <div class="col-2 cl">
-                                <div class="btn-toolbar" role="toolbar">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group"
-                                         th:each="pageNumber : ${pageNumbers}">
-                                        <a th:href="@{/user/accounts(page=${pageNumber - 1})}"
-                                           th:text="${pageNumber}"
-                                           th:class="${pageNumber==page.number + 1} ? active"></a>
-                                    </div>
+                        <div class="col-2 cl">
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group mr-2" role="group" aria-label="First group"
+                                     th:each="pageNumber : ${pageNumbers}">
+                                    <a th:href="@{/user/accounts(page=${pageNumber - 1})}"
+                                       th:text="${pageNumber}"
+                                       th:class="${pageNumber==page.number + 1} ? active"></a>
                                 </div>
                             </div>
                         </div>
@@ -88,9 +100,10 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
+</div>
 </div>
 <div th:insert="/general.html :: footer">
 

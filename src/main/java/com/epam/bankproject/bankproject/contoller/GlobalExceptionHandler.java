@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(IllegalArgumentException.class)
+   /* @ExceptionHandler(IllegalArgumentException.class)
     public String handleException(HttpServletRequest request, Exception ex){
         log.info("Exception Occured:: URL="+request.getRequestURL() + "Exception="+ ex);
+        System.out.println(ex.getMessage());
         return "error";
-    }
+    }*/
 
 }

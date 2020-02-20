@@ -22,13 +22,27 @@ public class ModelAndViewBuilder {
         return this;
     }
 
-    public ModelAndViewBuilder withPageableByFunction(String name,
-                                                      BiFunction<Integer, PageRequest, Page<?>> function,
-                                                      Integer id,
-                                                      PageRequest pageRequest) {
+    public ModelAndViewBuilder withPageableByBiFunction(String name,
+                                                        BiFunction<Integer, PageRequest, Page<?>> function,
+                                                        Integer id,
+                                                        PageRequest pageRequest) {
         Page<?> pageable = function.apply(id, pageRequest);
         namesToObjects.put(name, pageable);
 
+        if (pageable.getTotalPages() > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, pageable.getTotalPages())
+                    .boxed()
+                    .collect(Collectors.toList());
+            namesToObjects.put("pageNumbers", pageNumbers);
+        }
+        return this;
+    }
+
+    public ModelAndViewBuilder withPageableByFunction(String name,
+                                                      Function<PageRequest, Page<?>> function,
+                                                      PageRequest pageRequest) {
+        Page<?> pageable = function.apply(pageRequest);
+        namesToObjects.put(name, pageable);
         if (pageable.getTotalPages() > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, pageable.getTotalPages())
                     .boxed()

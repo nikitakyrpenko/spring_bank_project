@@ -28,20 +28,20 @@ public class AccountEntity {
     @Column(name = "balance",nullable = false)
     private Double balance;
 
-    @Column(name = "deposit_account_rate", columnDefinition = "double DEFAULT '0'")
-    private Double depositRate;
+    @Column(name = "deposit_account_rate")
+    private Double depositRate= 0.0;
 
-    @Column(name = "credit_limit",columnDefinition = "double DEFAULT '0'")
-    private Double creditLimit;
+    @Column(name = "credit_limit")
+    private Double creditLimit = 0.0;
 
-    @Column(name = "credit_rate", columnDefinition = "double DEFAULT '0'")
-    private Double creditRate;
+    @Column(name = "credit_rate")
+    private Double creditRate = 0.0;
 
-    @Column(name = "charge_per_month", columnDefinition = "double DEFAULT '0'")
-    private Double creditCharge;
+    @Column(name = "charge_per_month")
+    private Double creditCharge = 0.0;
 
-    @Column(name = "credit_liabilities", columnDefinition = "double DEFAULT '0'")
-    private Double creditLiability;
+    @Column(name = "credit_liabilities")
+    private Double creditLiability = 0.0;
 
     @Enumerated
     @Column(columnDefinition = "smallint", name = "fk_accounts_type_accounts",nullable = false)

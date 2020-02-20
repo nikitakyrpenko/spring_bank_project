@@ -55,6 +55,8 @@ public class UserEntity {
     @OneToMany( mappedBy = "owner")
     private List<AccountEntity> accounts;
 
+    @OneToMany( mappedBy = "owner")
+    private List<RequestEntity> requests;
 
 
 }
