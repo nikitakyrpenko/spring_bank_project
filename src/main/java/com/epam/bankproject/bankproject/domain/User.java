@@ -70,7 +70,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(Role.values());
+        return Collections.singletonList(role);
     }
 
     @Override

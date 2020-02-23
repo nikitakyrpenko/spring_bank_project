@@ -2,6 +2,7 @@ package com.epam.bankproject.bankproject.contoller.util;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-
+@Component
 public class ModelAndViewBuilder {
     private static final Map<String, Object> namesToObjects = new HashMap();
 

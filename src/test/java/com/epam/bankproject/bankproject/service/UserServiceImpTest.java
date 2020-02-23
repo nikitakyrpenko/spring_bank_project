@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.*;
@@ -133,8 +132,6 @@ public class UserServiceImpTest {
         verify(passwordEncoder).encode(user.getPassword());
         verify(userRepository).findByEmail(eq(userEntity.getEmail()));
         verify(userMapper).mapDomainToEntity(any(User.class));
-        verify(userRepository).save(userEntity);
-
 
     }
 }

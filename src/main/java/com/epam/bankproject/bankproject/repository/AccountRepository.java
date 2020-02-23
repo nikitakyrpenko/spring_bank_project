@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,8 @@ public interface AccountRepository extends PagingAndSortingRepository<AccountEnt
     List<AccountEntity> findAllByOwnerId(@NonNull Integer id);
 
     List<AccountEntity> findAll();
+
+    List<AccountEntity> findAllByExpirationDate(Date date);
 
     long countAllByOwnerId(Integer id);
 

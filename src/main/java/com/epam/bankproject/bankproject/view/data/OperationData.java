@@ -1,6 +1,9 @@
-package com.epam.bankproject.bankproject.contoller.util;
+package com.epam.bankproject.bankproject.view.data;
 import lombok.Data;
+
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Data
@@ -14,7 +17,8 @@ public class OperationData {
     private String purpose;
 
     @NotNull
-    private Double transfer;
+    @DecimalMin("0.01")
+    private BigDecimal transfer;
 
     private Date date;
 

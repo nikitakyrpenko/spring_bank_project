@@ -1,5 +1,6 @@
 package com.epam.bankproject.bankproject.service;
 
+import com.epam.bankproject.bankproject.ObjectCreator;
 import com.epam.bankproject.bankproject.domain.Account;
 import com.epam.bankproject.bankproject.domain.CreditAccount;
 import com.epam.bankproject.bankproject.domain.DepositAccount;
@@ -49,7 +50,7 @@ public class OperationServiceImplTest {
                 .build();
 
         RECEIVER = DepositAccount.builder()
-                .id(1)
+                .id(2)
                 .expirationDate(Date.valueOf("2021-03-12"))
                 .depositAmount(3000.0)
                 .depositRate(0.1)
@@ -89,18 +90,24 @@ public class OperationServiceImplTest {
     @Mock
     private Mapper<Operation, OperationEntity> operationMapper;
 
+    @Mock
+    private AccountService accountService;
+
     @InjectMocks
     private OperationServiceImpl operationService;
 
     @After
     public void resetMocks(){
-        reset(operationRepository,operationMapper);
+        reset(operationRepository,operationMapper, accountService);
     }
 
     @Test
     public void whenSaveWithSenderNotEnoughBalance_thenThrowMonetaryException(){
         expectedException.expect(MonetaryException.class);
         expectedException.expectMessage("Not enough balance to perform such operation");
+
+       when(accountService.findById(eq(1))).thenReturn(SENDER);
+       when(accountService.findById(eq(2))).thenReturn(RECEIVER);
 
         operationService.save(NOT_VALID_OPERATION);
 
@@ -117,11 +124,13 @@ public class OperationServiceImplTest {
         when(operationMapper.mapDomainToEntity(any(Operation.class))).thenReturn(operationEntityMock);
         when(operationRepository.save(any(OperationEntity.class))).thenReturn(operationEntityMock);
         when(operationMapper.mapEntityToDomain(any(OperationEntity.class))).thenReturn(operationMock);
+        when(accountService.findById(eq(1))).thenReturn(RECEIVER);
+        when(accountService.findById(eq(2))).thenReturn(SENDER);
 
         operationService.save(VALID_OPERATION);
 
-        assertEquals(Double.valueOf(2270.0), RECEIVER.getBalance());
-        assertEquals(Double.valueOf(1730.0), SENDER.getBalance());
+        assertEquals(Double.valueOf(3730.0), RECEIVER.getBalance());
+        assertEquals(Double.valueOf(270.0), SENDER.getBalance());
 
         verify(operationRepository,times(1)).save(any(OperationEntity.class));
         verify(operationMapper,times(1)).mapEntityToDomain(any(OperationEntity.class));

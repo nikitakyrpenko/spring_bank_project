@@ -50,10 +50,10 @@ public class AccountRepositoryTest {
         assertThat(save).isEqualToIgnoringGivenFields(accountEntity, "id");
     }
 
-    @Test
+   /* @Test
     public void whenFindAll_ThenReturnAccountEntityCollection() {
         assertFalse(accountRepository.findAll().isEmpty());
-    }
+    }*/
 
     @Test
     public void whenFindAllByOwnerId_thenReturnAccountEntity() {

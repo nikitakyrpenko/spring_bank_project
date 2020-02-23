@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class ChargeServiceImpl implements ChargeService {
     private ChargeRepository chargeRepository;
     private Mapper<Charge, ChargeEntity> chargeMapper;
 
+    @Override
     public void applyChargesByEndOfMonth() {
         accountService.findAll()
                 .stream()

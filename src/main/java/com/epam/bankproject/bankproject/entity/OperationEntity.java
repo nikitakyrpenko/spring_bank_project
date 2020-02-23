@@ -29,11 +29,11 @@ public class OperationEntity {
     @Column(name = "transfer", nullable = false)
     private Double transfer;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "fk_accounts_sender",nullable = false)
     private AccountEntity senderAccount;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "fk_accounts_receiver",nullable = false)
     private AccountEntity receiverAccount;
 

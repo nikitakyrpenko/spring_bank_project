@@ -6,6 +6,7 @@ import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,8 @@ public interface AccountService {
     List<Account> findAll(Pageable pageable);
 
     List<Account> findAll();
+
+    List<Account> findAllByExpirationDate(Date date);
 
     long countAllByOwnerId(Integer id);
 

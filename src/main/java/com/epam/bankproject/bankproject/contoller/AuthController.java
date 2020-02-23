@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@Controller
+@RestController
 public class AuthController {
 
     private final UserService userService;

@@ -9,7 +9,6 @@ import java.sql.Date;
 
 @ToString(callSuper = true)
 @EqualsAndHashCode
-
 public class DepositAccount extends Account implements InterestChargeable {
 
     @Getter

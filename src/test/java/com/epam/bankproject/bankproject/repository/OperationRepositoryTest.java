@@ -38,7 +38,7 @@ public class OperationRepositoryTest {
 
         assertTrue(operations.size() <= 2);
 
-        assertEquals(1, operations.size());
+        assertEquals(2, operations.size());
 
     }
 

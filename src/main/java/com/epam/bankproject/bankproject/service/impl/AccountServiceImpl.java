@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +38,7 @@ public class AccountServiceImpl implements AccountService {
                 .map(accountMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
 
-        return new PageImpl<Account>(accounts,PageRequest.of(currentPage,pageSize),totalRecords);
+        return new PageImpl<Account>(accounts, PageRequest.of(currentPage, pageSize), totalRecords);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> findAll(Pageable pageable) {
+    public List<Account> findAll(@NonNull Pageable pageable) {
         return accountRepository.findAll(pageable)
                 .stream()
                 .map(accountMapper::mapEntityToDomain)
@@ -63,7 +65,15 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public long countAllByOwnerId(Integer id) {
+    public List<Account> findAllByExpirationDate(@NonNull Date date) {
+        return accountRepository.findAllByExpirationDate(date)
+                .stream()
+                .map(accountMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public long countAllByOwnerId(@NonNull Integer id) {
         return accountRepository.countAllByOwnerId(id);
     }
 

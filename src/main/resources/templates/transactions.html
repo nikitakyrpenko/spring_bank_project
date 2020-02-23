@@ -51,13 +51,13 @@
                                 <div class="collapse">
                                     <input th:text="${operation.senderId}" th:field="*{senderId}">
                                 </div>
-                                <h6 class="card-header">New Transaction</h6>
+                                <h6 class="card-header" th:text="#{label.newTransaction}"></h6>
                                 <div class="row row-cust d-flex align-items-center">
-                                    <div class="col-4 ">Card number:</div>
+                                    <div class="col-4 " th:text="#{label.cardNumber}"></div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" id="cardNumber"
+                                        <input type="number" class="form-control" id="cardNumber"
                                                placeholder="Enter card number" value="" th:field="*{receiverId}">
-                                        <div class="alert alert-danger collapse.show" style="background-color: red"
+                                        <div class="alert alert-danger collapse" style="background-color: red"
                                              role="alert"
                                              th:if="${#fields.hasErrors('receiverId')}" th:errors="*{error}">
                                         </div>
@@ -65,7 +65,7 @@
                                 </div>
                                 <hr>
                                 <div class="row row-cust d-flex align-items-center">
-                                    <div class="col-4 ">Purpose:</div>
+                                    <div class="col-4 " th:text="#{label.purpose}"></div>
                                     <div class="col-6">
                                         <input type="text" class="form-control" id="purpose" placeholder="Enter purpose"
                                                value="" th:field="*{purpose}">
@@ -73,9 +73,9 @@
                                 </div>
                                 <hr>
                                 <div class="row row-cust d-flex align-items-center">
-                                    <div class="col-4">Transfer sum:</div>
+                                    <div class="col-4" th:text="#{label.transfer}"></div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" id="transactionSum"
+                                        <input type="number" class="form-control" id="transactionSum"
                                                placeholder="Enter the transfer sum" value="" th:field="*{transfer}">
                                         <div class="alert alert-danger collapse.show" style="background-color: red"
                                              role="alert"
@@ -86,16 +86,13 @@
 
                                 <hr>
                                 <!--Alerts. Changhe collapse to collapse.show to see the alerts-->
-                                <div class="alert alert-success collapse" role="alert" id="success">
-                                    Transaction is successfull!
-                                </div>
+
                                 <div class="alert alert-danger collapse" role="alert" id="error"
-                                     th:if="${error != null}" th:class="'alert alert-danger collapse.show'">
-                                    Error! Try again.
+                                     th:if="${error != null}" th:class="'alert alert-danger collapse.show'" th:text="#{label.transactionError}">
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-4">
-                                        <button class="btn btn-primary btn-cust">Submit</button>
+                                        <button class="btn btn-primary btn-cust" th:text="#{button.createAccount}"></button>
                                     </div>
                                 </div>
                             </div>

@@ -98,7 +98,7 @@
                                 <div class="btn-toolbar" role="toolbar">
                                     <div class="btn-group mr-2" role="group" aria-label="First group"
                                          th:each="pageNumber : ${pageNumbers}">
-                                        <a th:href="@{/user/accounts(page=${pageNumber - 1})}"
+                                        <a th:href="@{/user/charges(page=${pageNumber - 1})}"
                                            th:text="${pageNumber}"
                                            th:class="${pageNumber==page.number + 1} ? active"></a>
                                     </div>

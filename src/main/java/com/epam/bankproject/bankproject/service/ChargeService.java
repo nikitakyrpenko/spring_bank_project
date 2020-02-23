@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface ChargeService {
+
+    void applyChargesByEndOfMonth();
 
     List<Charge> findAllByAccountId(Integer id);
 

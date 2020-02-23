@@ -1,9 +1,10 @@
-package com.epam.bankproject.bankproject.service;
+package com.epam.bankproject.bankproject.service.impl;
 
 import com.epam.bankproject.bankproject.domain.Account;
 import com.epam.bankproject.bankproject.domain.Request;
 import com.epam.bankproject.bankproject.entity.RequestEntity;
 import com.epam.bankproject.bankproject.repository.RequestRepository;
+import com.epam.bankproject.bankproject.service.RequestService;
 import com.epam.bankproject.bankproject.service.mapper.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,13 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public void deleteById(Integer id) {
         requestRepository.deleteById(id);
+    }
+
+    @Override
+    public Request findById(Integer id) {
+        return requestRepository.findById(id)
+                .map(requestMapper::mapEntityToDomain)
+                .orElseThrow();
     }
 
     @Override

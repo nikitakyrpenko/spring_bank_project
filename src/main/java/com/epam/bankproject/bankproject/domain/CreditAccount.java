@@ -42,7 +42,6 @@ public class CreditAccount extends Account implements InterestChargeable {
                          User owner,
                          AccountType accountType) {
         super(id, expirationDate, balance, owner);
-        super.setBalance(limit);
         this.limit = limit;
         this.creditRate = creditRate;
         this.accountType = accountType;

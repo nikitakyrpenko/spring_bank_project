@@ -13,4 +13,6 @@ public interface RequestService {
     long countAll();
 
     void deleteById(Integer id);
+
+    Request findById(Integer id);
 }

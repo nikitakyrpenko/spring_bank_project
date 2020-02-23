@@ -45,8 +45,8 @@ public class UserRepositoryTest {
     public void whenFindByEmail_thenReturnUserEntity(){
         UserEntity me = new UserEntity();
         me.setId(1);
-        me.setName("Freya");
-        me.setEmail("dolor.Donec@etmagnaPraesent.net");
+        me.setName("Mykyta");
+        me.setEmail("mickaborscha@gmail.com");
 
         Optional<UserEntity> found = userRepository.findByEmail(me.getEmail());
 

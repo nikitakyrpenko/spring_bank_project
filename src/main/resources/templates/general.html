@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="header">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -17,19 +17,28 @@
     <!-- Header-->
     <header>
         <nav class="navbar navbar-expand navbar-light bg-light">
-            <a class="navbar-brand" th:href="@{/user/accounts(page=0)}">
+            <a class="navbar-brand" th:href="@{/user/accounts(page=0)}" sec:authorize= "hasRole('USER')">
+                <img src="../images/logo1.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+                YourBanking
+            </a>
+            <a class="navbar-brand" th:href="@{/admin/requests(page=0)}" sec:authorize= "hasRole('ADMIN')">
                 <img src="../images/logo1.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
                 YourBanking
             </a>
             <div class="navbar-collapse justify-content-end" id="navbarNavAltMarkup"
                  th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
-                <div class="navbar-nav">
-                    <a th:href="${urlBuilder.replaceQueryParam('lang', 'UKR').toUriString()}">
+                <div class="navbar-nav" align-items-center>
+                    <a class="nav-item nav-link" th:href="${urlBuilder.replaceQueryParam('lang', 'UKR').toUriString()}">
                         <img src="../images/UKR.png" alt="" style="margin-right: 10px">
                     </a>
-                    <a th:href="${urlBuilder.replaceQueryParam('lang', 'US').toUriString()}">
+                    <a class="nav-item nav-link" th:href="${urlBuilder.replaceQueryParam('lang', 'US').toUriString()}">
                         <img src="../images/USA.png" alt="">
                     </a>
+                    <form th:action="@{/logout}" method="post">
+                        <a class="nav-item nav-link" href="#" sec:authorize="isAuthenticated()">
+                            <input type="submit" value="Logout"/>
+                        </a>
+                    </form>
                 </div>
             </div>
         </nav>

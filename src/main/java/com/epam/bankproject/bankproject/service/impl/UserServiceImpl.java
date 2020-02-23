@@ -60,12 +60,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserEntity> userById = userRepository.findByEmail(username);
-
         User user = userById
                 .map(userMapper::mapEntityToDomain)
                 .orElseThrow(() -> {
             throw new UsernameNotFoundException("User not found");
         });
+        System.out.println(user);
         return user;
     }
 
