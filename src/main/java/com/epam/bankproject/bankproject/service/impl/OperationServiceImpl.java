@@ -63,7 +63,7 @@ public class OperationServiceImpl implements OperationService {
         operations = operationRepository.findAllOperationsByAccountId(id, pageable)
                 .stream()
                 .map(operationMapper::mapEntityToDomain)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
 
         return new PageImpl<Operation>(operations, PageRequest.of(currentPage, pageSize), totalRecords);
     }
@@ -74,7 +74,7 @@ public class OperationServiceImpl implements OperationService {
         return operationRepository.findAllByReceiverAccountId(id, pageable)
                 .stream()
                 .map(operationMapper::mapEntityToDomain)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
     }
 
 
@@ -83,7 +83,7 @@ public class OperationServiceImpl implements OperationService {
         return operationRepository.findAllBySenderAccountId(id, pageable)
                 .stream()
                 .map(operationMapper::mapEntityToDomain)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
     }
 
     @Override

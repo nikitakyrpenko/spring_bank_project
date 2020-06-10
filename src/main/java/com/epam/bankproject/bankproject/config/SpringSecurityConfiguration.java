@@ -18,9 +18,9 @@ import java.util.Locale;
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+    /*@Autowired
     private  UserService userService;
-
+*/
     @Autowired
     private  CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
@@ -53,8 +53,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
+    /*@Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-    }
+    }*/
 }

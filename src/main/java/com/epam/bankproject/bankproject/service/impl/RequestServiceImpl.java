@@ -55,7 +55,9 @@ public class RequestServiceImpl implements RequestService {
     public Request findById(Integer id) {
         return requestRepository.findById(id)
                 .map(requestMapper::mapEntityToDomain)
-                .orElseThrow();
+                .<RuntimeException>orElseThrow(() -> {
+            throw new RuntimeException();
+        });
     }
 
     @Override

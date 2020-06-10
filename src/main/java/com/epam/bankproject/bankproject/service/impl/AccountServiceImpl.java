@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -45,7 +46,9 @@ public class AccountServiceImpl implements AccountService {
     public Account findById(@NonNull Integer id) {
         return accountRepository.findById(id)
                 .map(accountMapper::mapEntityToDomain)
-                .orElseThrow();
+                .<NoSuchElementException>orElseThrow(() -> {
+                    throw new NoSuchElementException();
+        });
     }
 
     @Override

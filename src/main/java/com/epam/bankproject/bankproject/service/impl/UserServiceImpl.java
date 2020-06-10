@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByEmail(email)
                 .map(userMapper::mapEntityToDomain)
                 .filter(user -> passwordEncoder.matches(password, user.getPassword()))
-                .orElseThrow();
+                .<RuntimeException>orElseThrow(() -> {throw new RuntimeException();});
     }
 
     @Override
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService{
         return userRepository
                 .findById(id)
                 .map(userMapper::mapEntityToDomain)
-                .orElseThrow();
+                .<RuntimeException>orElseThrow(() -> {throw new RuntimeException();});
     }
 
     @Override
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService{
         Optional<UserEntity> userById = userRepository.findByEmail(username);
         User user = userById
                 .map(userMapper::mapEntityToDomain)
-                .orElseThrow(() -> {
+                .<UsernameNotFoundException>orElseThrow(() -> {
             throw new UsernameNotFoundException("User not found");
         });
         System.out.println(user);
